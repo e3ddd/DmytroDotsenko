@@ -6,6 +6,7 @@ use App\Http\CheckNullableInterface;
 use App\Http\CheckNullableParams;
 use App\Models\PaintingImage;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use RuntimeException;
 
 class PaintingImagesRepository implements CheckNullableInterface
@@ -55,8 +56,7 @@ class PaintingImagesRepository implements CheckNullableInterface
     public function saveImages($storeName, $file)
     {
         $this->checkNullable([$storeName]);
-        if(is_file($file)){
-            $file->storeAs('public/images', $storeName);
-        }
+        $file->storeAs('/public/images', $storeName);
+//        $file->storeAs('public/images', $storeName);
     }
 }

@@ -24,6 +24,7 @@ Route::get('/administration/login', [ShowController::class, 'showLoginArminForm'
 Route::get('/administration/login/log', [LoginController::class, 'login']);
 
 Route::get('/get-last-painting', [PaintingController::class, 'getLastPainting']);
+Route::get('/get-all-painting-with-pagination', [PaintingController::class, 'getAllPaintingsWithPagination']);
 
 Route::middleware('administration')
     ->group(function() {

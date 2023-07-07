@@ -18,7 +18,7 @@
 
 <script>
 import Navbar from "./Navbar.vue";
-import Catalog from "./Catalog.vue";
+import Catalog from "./Catalog/Catalog.vue";
 import CreatePainting from "./CreatePainting/CreatePainting.vue";
 
 const routes = {

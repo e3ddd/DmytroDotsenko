@@ -18,6 +18,11 @@ class PaintingService
         return $this->paintingRepository->getAllPaintings();
     }
 
+    public function getAllPaintingsWithPagination()
+    {
+        return $this->paintingRepository->getAllPaintingsWithPagination();
+    }
+
     public function getLastPainting()
     {
         return $this->paintingRepository->getLastPainting();
@@ -28,9 +33,9 @@ class PaintingService
         return $this->paintingRepository->getPaintingById($paintingId);
     }
 
-    public function storePainting($name, $name_en, $price, $description, $width, $height, $long, $sold_status)
+    public function storePainting($name, $name_en, $price, $description, $description_en, $year, $width, $height, $long, $sold_status)
     {
-        return $this->paintingRepository->storePainting($name, $name_en, $price, $description, $width, $height, $long, $sold_status);
+        return $this->paintingRepository->storePainting($name, $name_en, $price, $description, $description_en,  $year, $width, $height, $long, $sold_status);
     }
 
     public function updatePaintingById($paintingId, $param, $value)

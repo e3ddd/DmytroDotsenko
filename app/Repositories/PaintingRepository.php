@@ -35,6 +35,11 @@ class PaintingRepository implements CheckNullableInterface
         return $this->painting->all();
     }
 
+    public function getAllPaintingsWithPagination()
+    {
+        return $this->painting->with('images')->paginate(1);
+    }
+
     public function getLastPainting()
     {
         return $this->painting->all()->last();
@@ -47,15 +52,17 @@ class PaintingRepository implements CheckNullableInterface
         return $this->painting->find($paintingId);
     }
 
-    public function storePainting($name, $name_en, $price, $description, $width, $height, $long, $sold_status)
+    public function storePainting($name, $name_en, $price, $description, $description_en, $year, $width, $height, $long, $sold_status)
     {
-        $this->checkNullable([$name, $name_en, $price, $description, $width, $height, $long, $sold_status]);
+        $this->checkNullable([$name, $name_en, $price, $description, $description_en, $year, $width, $height, $long, $sold_status]);
 
         $this->painting->create([
             'name' => $name,
             'name_en' => $name_en,
             'price' => $price,
             'description' => $description,
+            'description_en' => $description_en,
+            'year' => $year,
             'width' => $width,
             'height' => $height,
             'long' => $long,

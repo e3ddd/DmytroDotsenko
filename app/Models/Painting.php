@@ -16,6 +16,8 @@ class Painting extends Model
         'name_en',
         'price',
         'description',
+        'description_en',
+        'year',
         'width',
         'height',
         'long',

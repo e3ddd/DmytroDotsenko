@@ -14,6 +14,6 @@ class TestController extends Controller
 {
     public function test()
     {
-        dd(Painting::all()->last()->id);
+
     }
 }

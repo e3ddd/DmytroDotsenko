@@ -32,23 +32,40 @@
                                     <label for="">Назва</label>
                                 </div>
                                 <div class="col languages">
-                                    <span @click="language" id="ua" :class="this.lang.ua">Українська</span>
+                                    <span @click="language" id="name_ua" :class="this.lang.name._ua">Українська</span>
                                     /
-                                    <span @click="language" id="en" :class="this.lang.en">English</span>
+                                    <span @click="language" id="name_en" :class="this.lang.name._en">English</span>
                                 </div>
                             </div>
                         </div>
-                        <input type="text" name="name" v-model="this.name" :placeholder="'Українська'" v-if="this.active === 'ua'">
-                        <input type="text" name="name" v-model="this.name_en" :placeholder="'English'" v-if="this.active === 'en'">
+                        <input type="text" name="name" v-model="this.name" :placeholder="'Українська'" v-if="this.lang.name.active === 'name_ua'">
+                        <input type="text" name="name" v-model="this.name_en" :placeholder="'English'" v-if="this.lang.name.active === 'name_en'">
                     </div>
                     <div class="row mb-2 p-0">
                         <label for="">Ціна</label>
                         <input type="text" name="price" v-model="this.price">
                     </div>
                     <div class="row mb-2 p-0">
-                        <label for="">Опис</label>
-                        <textarea rows="4" cols="50" name="description" v-model="this.description"/>
+                        <div class="col p-0">
+                            <div class="row">
+                                <div class="col-9">
+                                    <label for="">Опис</label>
+                                </div>
+                                <div class="col languages">
+                                    <span @click="language" id="desc_ua" :class="this.lang.desc._ua">Українська</span>
+                                    /
+                                    <span @click="language" id="desc_en" :class="this.lang.desc._en">English</span>
+                                </div>
+                            </div>
+                        </div>
+                        <textarea rows="4" cols="50" name="description" v-model="this.description" v-if="this.lang.desc.active === 'desc_ua'"/>
+                        <textarea rows="4" cols="50" name="description" v-model="this.description_en" v-if="this.lang.desc.active === 'desc_en'"/>
                     </div>
+                    <div class="row mb-2 p-0">
+                        <label for="">Рік</label>
+                        <input type="text" v-model="this.year">
+                    </div>
+
                     <div class="row mb-2 p-0">
                         <label for="">Ширина</label>
                         <input type="text" v-model="this.width">
@@ -99,16 +116,25 @@ export default {
           name_en: '',
           price: 0,
           description: '',
+          description_en: '',
+          year: '',
           width: 0,
           height: 0,
           long: 0,
           sold: '',
           images: [],
           lang: {
-              ua: 'choose',
-              en: '',
+              desc: {
+                  _ua: 'choose',
+                  _en: '',
+                  active: 'desc_ua',
+              },
+              name: {
+                  _ua: 'choose',
+                  _en: '',
+                  active: 'name_ua',
+              },
           },
-          active: 'ua',
           alert_message: {
               type: '',
               content: '',
@@ -133,6 +159,8 @@ export default {
                 fd.append('name_en', this.name_en)
                 fd.append('price', this.price)
                 fd.append('description', this.description)
+                fd.append('description_en', this.description_en)
+                fd.append('year', this.year)
                 fd.append('width', this.width)
                 fd.append('height', this.height)
                 fd.append('long', this.long)
@@ -158,6 +186,8 @@ export default {
                         this.name_en = ''
                         this.price = ''
                         this.description = ''
+                        this.description_en = ''
+                        this.year = ''
                         this.width = ''
                         this.height = ''
                         this.long = ''
@@ -168,9 +198,8 @@ export default {
                         }, 5000)
                     })
                     .catch((err) => {
-                        this.alert_message.type = 'error'
                         this.alert_message.content = err.response.data.message
-
+                        this.alert_message.type = 'error'
                         setTimeout(() => {
                             this.alert_message.type = ''
                             this.alert_message.content = ''
@@ -180,14 +209,19 @@ export default {
        },
 
         language(e) {
-            for (const lang in this.lang) {
-                if(this.lang[lang] !== ''){
-                    this.lang[lang] = ''
+            const lang = e.target.id.substr(-3)
+            const field = e.target.id.replace(lang, '')
+
+            for (const lang in this.lang[field]) {
+                if(lang !== 'active'){
+                    if(this.lang[field][lang] !== ''){
+                        this.lang[field][lang] = ''
+                    }
                 }
             }
 
-            this.lang[e.target.id] = 'choose'
-            this.active = e.target.id
+            this.lang[field][lang] = 'choose'
+            this.lang[field].active = e.target.id
         }
     }
 

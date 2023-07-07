@@ -21,6 +21,11 @@ class PaintingController extends Controller
         return $this->paintingService->getAllPaintings();
     }
 
+    public function getAllPaintingsWithPagination()
+    {
+        return $this->paintingService->getAllPaintingsWithPagination();
+    }
+
     public function getLastPainting()
     {
         return $this->paintingService->getLastPainting();
@@ -33,7 +38,12 @@ class PaintingController extends Controller
 
     public function storePainting(StorePaintingRequest $request)
     {
-        $paintingId = $this->paintingService->storePainting($request->name, $request->name_en, $request->price, $request->description, $request->width, $request->height, $request->long, $request->sold_status);
+        $paintingId = $this->paintingService->storePainting(
+            $request->name, $request->name_en, $request->price,
+            $request->description, $request->description_en,
+            $request->year, $request->width, $request->height,
+            $request->long, $request->sold_status);
+
         if($paintingId){
             foreach ($request->images as $image){
                 $this->paintintImagesService->storeImages($paintingId, $image);
