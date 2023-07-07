@@ -25,6 +25,7 @@ class StorePaintingRequest extends FormRequest
     {
         return [
             'name' => 'required',
+            'name_en' => 'required',
             'price' => 'required',
             'description' => 'required',
             'width' => 'required',

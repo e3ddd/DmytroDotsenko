@@ -18,6 +18,11 @@ class PaintingService
         return $this->paintingRepository->getAllPaintings();
     }
 
+    public function getLastPainting()
+    {
+        return $this->paintingRepository->getLastPainting();
+    }
+
     public function getPaintingById($paintingId)
     {
         return $this->paintingRepository->getPaintingById($paintingId);
@@ -25,12 +30,12 @@ class PaintingService
 
     public function storePainting($name, $name_en, $price, $description, $width, $height, $long, $sold_status)
     {
-        $this->paintingRepository->storePainting($name, $name_en, $price, $description, $width, $height, $long, $sold_status);
+        return $this->paintingRepository->storePainting($name, $name_en, $price, $description, $width, $height, $long, $sold_status);
     }
 
-    public function updatePaintingById($paintingId, $param, $content)
+    public function updatePaintingById($paintingId, $param, $value)
     {
-        $this->paintingRepository->updatePaintingById($paintingId, $param, $content);
+        $this->paintingRepository->updatePaintingById($paintingId, $param, $value);
     }
 
     public function destroyPainting($paintingId)

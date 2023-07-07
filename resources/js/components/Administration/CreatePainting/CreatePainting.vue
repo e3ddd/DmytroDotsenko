@@ -1,4 +1,12 @@
 <template>
+    <div class="row alert_message">
+        <div class="col error" v-if="this.alert_message.type === 'error'">
+            {{this.alert_message.content}}
+        </div>
+        <div class="col success" v-if="this.alert_message.type === 'success'">
+            {{this.alert_message.content}}
+        </div>
+    </div>
     <div class="container-fluid pb-5">
         <div class="col">
             <div class="row title mt-2">
@@ -7,10 +15,13 @@
             <div class="col d-flex justify-content-center align-items-center">
                 <div class="row">
                     <div class="col">
-                        <upload-image/>
+                        <upload-image
+                            @getImages="onUpdateImages"
+                        />
                     </div>
                 </div>
             </div>
+            <form @submit.prevent enctype="multipart/form-data">
             <div class="row">
                 <div class="col-2"></div>
                 <div class="col">
@@ -21,14 +32,14 @@
                                     <label for="">Назва</label>
                                 </div>
                                 <div class="col languages">
-                                    <span @click="language" id="UA" :class="this.lang.ua">Українська</span>
+                                    <span @click="language" id="ua" :class="this.lang.ua">Українська</span>
                                     /
-                                    <span @click="language" id="EN" :class="this.lang.en">English</span>
+                                    <span @click="language" id="en" :class="this.lang.en">English</span>
                                 </div>
                             </div>
                         </div>
-                        <input type="text" name="name" v-model="this.name" :placeholder="'Українська'" v-if="this.active === 'UA'">
-                        <input type="text" name="name" v-model="this.name_en" :placeholder="'English'" v-if="this.active === 'EN'">
+                        <input type="text" name="name" v-model="this.name" :placeholder="'Українська'" v-if="this.active === 'ua'">
+                        <input type="text" name="name" v-model="this.name_en" :placeholder="'English'" v-if="this.active === 'en'">
                     </div>
                     <div class="row mb-2 p-0">
                         <label for="">Ціна</label>
@@ -70,6 +81,7 @@
                 </div>
                 <div class="col-2"></div>
             </div>
+            </form>
         </div>
     </div>
 </template>
@@ -96,36 +108,75 @@ export default {
               ua: 'choose',
               en: '',
           },
-          active: 'UA',
+          active: 'ua',
+          alert_message: {
+              type: '',
+              content: '',
+          },
       }
     },
 
     methods: {
+        onUpdateImages(images) {
+            if(this.images.length !== 0){
+                this.images = []
+            }
+            this.images.push(images)
+        },
+
+
        async store() {
-           // const fd = new FormData();
-           // this.images.map(item => fd.append('images[]', item.file, item.file.name))
-           // fd.append('name', this.name);
-           // fd.append('price', this.price);
-           // fd.append('description', this.description);
-           // fd.append('width', this.width);
-           // fd.append('height', this.height);
-           // fd.append('long', this.long);this.lang
-           // fd.append('sold_status', this.sold);
-           axios.post('/administration/create-painting',{
-                   name: this.name,
-                   price: this.price,
-                   description: this.description,
-                   width: this.width,
-                   height: this.height,
-                   long: this.long,
-                   sold_status: this.sold
-           })
-               .then((response) => {
-                   console.log(response)
-               })
-               .catch((err) => {
-                   console.log(err)
-               })
+            if(this.images.length !== 0){
+                let fd = new FormData()
+                this.images[0].map((item, key) => fd.append('images[' + key + ']', item.file, item.file.name));
+                fd.append('name', this.name)
+                fd.append('name_en', this.name_en)
+                fd.append('price', this.price)
+                fd.append('description', this.description)
+                fd.append('width', this.width)
+                fd.append('height', this.height)
+                fd.append('long', this.long)
+
+                if(this.sold){
+                    this.sold = 1
+                }else{
+                    this.sold = 0
+                }
+
+                fd.append('sold_status', this.sold)
+                axios.post('/administration/create-painting', fd, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+                    .then((response) => {
+                        this.alert_message.type = 'success'
+                        this.alert_message.content = 'Картина додана до каталогу'
+
+                        this.images = []
+                        this.name = ''
+                        this.name_en = ''
+                        this.price = ''
+                        this.description = ''
+                        this.width = ''
+                        this.height = ''
+                        this.long = ''
+
+                        setTimeout(() => {
+                            this.alert_message.type = ''
+                            this.alert_message.content = ''
+                        }, 5000)
+                    })
+                    .catch((err) => {
+                        this.alert_message.type = 'error'
+                        this.alert_message.content = err.response.data.message
+
+                        setTimeout(() => {
+                            this.alert_message.type = ''
+                            this.alert_message.content = ''
+                        }, 5000)
+                    })
+            }
        },
 
         language(e) {
@@ -144,6 +195,29 @@ export default {
 </script>
 
 <style scoped>
+.title h5 {
+    top: -100% !important;
+}
+
+.alert_message {
+    position: fixed;
+    z-index: 99;
+    left: 47%;
+    top: -1px;
+    color: #ffffff;
+    font-size: 14px;
+    width: 300px !important;
+    height: 60px;
+}
+
+.error {
+    background: #fe3939;
+}
+
+.success {
+    background: #00ba0c;
+}
+
 .choose {
     color: #006bf7;
 }

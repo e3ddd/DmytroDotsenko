@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\PaintingController;
+use App\Http\Controllers\Auth\PaintingImagesController;
 use App\Http\Controllers\Auth\ShowController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +22,8 @@ Route::get('/test', [\App\Http\Controllers\TestController::class, 'test']);
 Route::get('/', [ShowController::class, 'showIndex']);
 Route::get('/administration/login', [ShowController::class, 'showLoginArminForm']);
 Route::get('/administration/login/log', [LoginController::class, 'login']);
+
+Route::get('/get-last-painting', [PaintingController::class, 'getLastPainting']);
 
 Route::middleware('administration')
     ->group(function() {

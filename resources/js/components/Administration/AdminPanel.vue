@@ -64,7 +64,7 @@ export default {
     background-color: #a3adb2;
     width: 1000px;
     height: 100%;
-    opacity: 0.5;
+    opacity: 0.75;
 }
 
 </style>

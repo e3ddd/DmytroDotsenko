@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\CheckNullableParams;
 use App\Http\Controllers\Auth\PaintingController;
+use App\Models\Painting;
 use App\Models\User;
 use App\Repositories\PaintingRepository;
 use App\Services\PaintingService;
@@ -13,6 +14,6 @@ class TestController extends Controller
 {
     public function test()
     {
-
+        dd(Painting::all()->last()->id);
     }
 }
