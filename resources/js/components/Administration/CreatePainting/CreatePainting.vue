@@ -14,7 +14,7 @@
             </div>
             <div class="col d-flex justify-content-center align-items-center">
                 <div class="row">
-                    <div class="col">
+                    <div class="col-xxl">
                         <upload-image
                             @getImages="onUpdateImages"
                         />
@@ -22,7 +22,7 @@
                 </div>
             </div>
             <form @submit.prevent enctype="multipart/form-data">
-            <div class="row">
+            <div class="row mt-2">
                 <div class="col-2"></div>
                 <div class="col">
                     <div class="row mb-2 p-0">

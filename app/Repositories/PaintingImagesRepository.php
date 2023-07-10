@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Http\CheckNullableInterface;
 use App\Http\CheckNullableParams;
+use App\Http\ImageProcess;
 use App\Models\PaintingImage;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -57,6 +58,10 @@ class PaintingImagesRepository implements CheckNullableInterface
     {
         $this->checkNullable([$storeName]);
         $file->storeAs('/public/images', $storeName);
-//        $file->storeAs('public/images', $storeName);
+        $imgPath = storage_path() . '/app/public/images/' . $storeName;
+
+        if($file->storeAs('/public/images', $storeName)){
+            ImageProcess::process($imgPath);
+        }
     }
 }

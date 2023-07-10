@@ -9,7 +9,7 @@
                             <Slide v-for="image in painting.images"
                                    :key="image.id">
 <!--                                <div class="img" :style="{background: 'url(' + '/storage/images/' + image.painting_id + '_' + image.hash_id + ')'}"></div>-->
-                                <img :src="'/storage/images/' + image.painting_id + '_' + image.hash_id" alt="main_image" height="400">
+                                <img :src="'/storage/images/' + image.painting_id + '_' + image.hash_id" alt="main_image" height="768">
                             </Slide>
                             <template #addons>
                                 <Navigation />

@@ -1,20 +1,20 @@
 <template>
-    <div class="row mb-2 upload-painting">
-        <div class="col p-0 d-flex justify-content-center align-items-center">
-            <label for="upload-painting" style="padding: 100px;" v-if="this.files.length === 0">
+    <div class="row mb-2">
+        <div class="col p-0">
+            <label class="upload-painting" for="upload-painting" style="padding: 100px;" v-if="this.files.length === 0">
                 <span>Добавити фотографію...</span>
             </label>
-            <img v-if="this.files.length > 0" :src="this.files[0].url" alt="main-img" width="400" height="230">
+            <img v-if="this.files.length > 0" :src="this.files[0].url" alt="main-img" height="400">
         </div>
         <input type="file" id="upload-painting" @input="getImages" @change="onFileChange">
     </div>
     <div class="row images">
         <div class="col">
-            <div class="row">
-                <div class="col-4 p-2 d-flex justify-content-center" v-for="image in this.files">
-                    <img :src="image.url" alt="image" width="100" height="100" @click="deleteImage" :id="image.id">
+            <div class="row" style="max-width: 617px;">
+                <div class="col-3 p-0 mt-1" v-for="image in this.files">
+                    <img :src="image.url" alt="image" height="100" @click="deleteImage" :id="image.id">
                 </div>
-                <div class="col-4 upload-image" v-if="this.files.length !== 0">
+                <div class="col-3 p-0 mt-1 upload-image" v-if="this.files.length !== 0">
                     <label for="upload-painting">
                         +
                     </label>
@@ -78,21 +78,19 @@ label {
 .upload-painting {
     cursor: pointer;
     border: 1px solid black;
-
 }
 
-.images {
-    max-width: 410px !important;
-}
+/*.images {*/
+/*    max-width: 410px !important;*/
+/*}*/
 
 .upload-image {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 8px;
-    margin-left: 17px;
-    width: 100px !important;
     height: 100px;
+    /*max-width: 100px;*/
     border: 1px solid black;
 }
 </style>

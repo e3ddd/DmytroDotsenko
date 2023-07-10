@@ -30,7 +30,5 @@ class PaintingImagesService
             $storeName = $paintingId . '_' . $image->hashName();
             $this->paintingImagesRepository->storeImages($paintingId,  $image->hashName());
             $this->paintingImagesRepository->saveImages($storeName, $image);
-
-
     }
 }
