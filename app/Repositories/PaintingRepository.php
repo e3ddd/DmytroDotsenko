@@ -37,7 +37,7 @@ class PaintingRepository implements CheckNullableInterface
 
     public function getAllPaintingsWithPagination()
     {
-        return $this->painting->with('images')->paginate(1);
+        return $this->painting->with('images')->paginate(5);
     }
 
     public function getLastPainting()

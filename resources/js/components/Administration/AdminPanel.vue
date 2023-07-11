@@ -9,7 +9,7 @@
             <div class="col-2 p-0">
                <navbar/>
             </div>
-            <div class="col-xxl">
+            <div class="col-10">
                 <component :is="currentView"/>
             </div>
         </div>
@@ -62,7 +62,7 @@ export default {
 
 .panel {
     background-color: #a3adb2;
-    width: 1200px;
+    width: 1400px;
     height: 100%;
     opacity: 0.75;
 }

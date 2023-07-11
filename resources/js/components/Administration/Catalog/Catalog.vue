@@ -1,31 +1,20 @@
 <template>
     <div class="container">
         <div class="row">
+            <div class="col d-flex justify-content-center align-items-center" style="padding: 300px" v-if="this.loading">
+                <loader/>
+            </div>
             <div class="col">
                 <div class="row" v-for="painting in this.paintings">
-                    <div class="col" v-if="this.loading"></div>
                     <div class="col pt-4 images">
-                        <Carousel>
-                            <Slide v-for="image in painting.images"
-                                   :key="image.id">
-<!--                                <div class="img" :style="{background: 'url(' + '/storage/images/' + image.painting_id + '_' + image.hash_id + ')'}"></div>-->
-                                <img :src="'/storage/images/' + image.painting_id + '_' + image.hash_id" alt="main_image" height="768">
-                            </Slide>
-                            <template #addons>
-                                <Navigation />
-                                <Pagination />
-                            </template>
-                        </Carousel>
+                        <images
+                            :images="painting.images"
+                        />
                     </div>
-                    <div class="col-7">
-                        <div class="row">
-                            <div class="col">
-                                Назва
-                            </div>
-                            <div class="col">
-                                {{painting.name}}
-                            </div>
-                        </div>
+                    <div class="col">
+                        <content
+                            :painting="painting"
+                        />
                     </div>
                 </div>
             </div>
@@ -42,16 +31,16 @@
 </template>
 
 <script>
-import 'vue3-carousel/dist/carousel.css';
-import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
+import Images from "./Images.vue";
+import Content from "./Content.vue";
+import Loader from "../../UI/Loader.vue";
 import PagePagination from "../../Pagination.vue";
 export default {
     components: {
+        Loader,
         PagePagination,
-        Carousel,
-        Slide,
-        Pagination,
-        Navigation,
+        Images,
+        Content,
     },
     data() {
         return {
@@ -74,12 +63,16 @@ export default {
         },
 
         async getPaintings(page){
+            this.loading = true
             axios.get('/get-all-painting-with-pagination?page=' + page, )
                 .then((response) => {
                     this.paintings = response.data.data
                     this.total = Math.ceil(response.data.total / response.data.per_page)
                 })
                 .catch(err => console.log(err))
+                .finally(() => {
+                    this.loading = false
+                })
         }
     },
 
