@@ -24,6 +24,6 @@ class AdministrationMiddleware
                 return $next($request);
             }
         }
-        return redirect()->to('/administration/login');
+        return redirect()->to('/admin/login');
     }
 }

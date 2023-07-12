@@ -10,7 +10,7 @@
                <navbar/>
             </div>
             <div class="col-10">
-                <component :is="currentView"/>
+                <router-view></router-view>
             </div>
         </div>
     </div>
@@ -18,38 +18,16 @@
 
 <script>
 import Navbar from "./Navbar.vue";
-import Catalog from "./Catalog/Catalog.vue";
-import CreatePainting from "./CreatePainting/CreatePainting.vue";
 
-const routes = {
-    '/catalog': Catalog,
-    '/create': CreatePainting,
-}
 export default {
     components: {
         Navbar
     },
-
-    data() {
-        return {
-            currentPath: window.location.hash
-        }
-    },
-    computed: {
-        currentView() {
-            return routes[this.currentPath.slice(1) || '/']
-        }
-    },
-    mounted() {
-        window.addEventListener('hashchange', () => {
-            this.currentPath = window.location.hash
-        })
-    }
-
 }
 </script>
 
 <style scoped>
+
 .head span {
     color: #fff;
     margin: 0;
@@ -63,7 +41,6 @@ export default {
 .panel {
     background-color: #a3adb2;
     width: 1400px;
-    height: 100%;
     opacity: 0.75;
 }
 

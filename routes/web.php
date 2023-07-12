@@ -18,18 +18,25 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/test', [\App\Http\Controllers\TestController::class, 'test']);
 
-
-Route::get('/', [ShowController::class, 'showIndex']);
-Route::get('/administration/login', [ShowController::class, 'showLoginArminForm']);
 Route::get('/administration/login/log', [LoginController::class, 'login']);
+Route::get('/admin/login', [ShowController::class, 'showLoginArminForm']);
 
 Route::get('/get-last-painting', [PaintingController::class, 'getLastPainting']);
 Route::get('/get-all-painting-with-pagination', [PaintingController::class, 'getAllPaintingsWithPagination']);
 
-Route::middleware('administration')
+Route::get('/', [ShowController::class, 'showApp']);
+
+
+
+Route::prefix('admin')->middleware('administration')
     ->group(function() {
-        Route::get('/administration', [ShowController::class, 'showAdminPanel']);
-        Route::get('/administration/catalog', [ShowController::class, 'showTest']);
-        Route::post('/administration/create-painting', [PaintingController::class, 'storePainting']);
+        Route::get('/', [ShowController::class, 'showAdmin']);
+        Route::post('/create-painting', [PaintingController::class, 'storePainting']);
+    });
+
+Route::group([], function() {
+    Route::get('/', [ShowController::class, 'showApp']);
+
 });
 
+Route::fallback(\App\Http\Controllers\FrontendController::class);

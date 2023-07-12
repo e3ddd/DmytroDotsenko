@@ -6,12 +6,12 @@
             </div>
             <div class="col">
                 <div class="row" v-for="painting in this.paintings">
-                    <div class="col pt-4 images">
+                    <div class="col-5 pt-4 images">
                         <images
                             :images="painting.images"
                         />
                     </div>
-                    <div class="col">
+                    <div class="col pt-4">
                         <content
                             :painting="painting"
                         />

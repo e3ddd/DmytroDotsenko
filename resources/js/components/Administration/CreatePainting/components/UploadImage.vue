@@ -1,6 +1,6 @@
 <template>
     <div class="row mb-2">
-        <div class="col p-0">
+        <div class="col p-0 d-flex justify-content-center align-items-center">
             <label class="upload-painting" for="upload-painting" style="padding: 100px;" v-if="this.files.length === 0">
                 <span>Добавити фотографію...</span>
             </label>
@@ -11,7 +11,7 @@
     <div class="row images">
         <div class="col">
             <div class="row" style="max-width: 617px;">
-                <div class="col-3 p-0 mt-1" v-for="image in this.files">
+                <div class="col-3 p-0 mt-1 d-flex justify-content-center align-items-center" v-for="image in this.files">
                     <img :src="image.url" alt="image" height="100" @click="deleteImage" :id="image.id">
                 </div>
                 <div class="col-3 p-0 mt-1 upload-image" v-if="this.files.length !== 0">

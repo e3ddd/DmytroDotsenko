@@ -1,14 +1,20 @@
 import './bootstrap';
-
 import {createApp} from 'vue';
-
-import Test from "./Test.vue";
-
-import Index from "./components/Index.vue";
-import Login from "./components/Administration/Login.vue";
+import App from "./App.vue";
 import AdminPanel from "./components/Administration/AdminPanel.vue";
+import Login from "./components/Administration/Login.vue";
 
-createApp(Test).mount('#test');
-createApp(Index).mount('#index');
-createApp(Login).mount('#admin-login')
-createApp(AdminPanel).mount('#admin-panel')
+createApp(Login).mount('#login');
+
+import router from './router.js';
+import router_admin from './router-admin.js';
+
+const app = createApp(App);
+const admin = createApp(AdminPanel);
+
+app.use(router);
+admin.use(router_admin);
+
+app.mount('#app');
+admin.mount('#admin');
+

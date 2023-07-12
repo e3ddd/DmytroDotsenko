@@ -60,14 +60,14 @@ export default {
 .current_page {
     border: none;
     border-radius: 5px;
-    background: #025a70;
+    background: #43846b;
     color: white;
 }
 
 .hlpbtn {
     margin: 3px;
     border: none;
-    background: #025a70;
+    background: #43846b;
     color: white;
     box-shadow: 2px 2px 5px grey;
 }

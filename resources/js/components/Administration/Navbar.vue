@@ -3,13 +3,13 @@
         <div class="row">
             <div class="col p-3 links">
                 <div class="row">
-                    <div class="col link">
-                        <a href="#/create">Добавити роботу</a>
+                    <div class="col mt-2 link">
+                        <router-link to="/admin/create">Добавити роботу</router-link>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col link">
-                        <a href="#/catalog">Каталог</a>
+                    <div class="col mt-2 link">
+                        <router-link to="/admin/catalog" >Каталог</router-link>
                     </div>
                 </div>
             </div>
@@ -37,7 +37,6 @@ a:hover {
 }
 
 .nav-bar {
-    height: 100%;
     background-color: #64a0c2;
 }
 </style>

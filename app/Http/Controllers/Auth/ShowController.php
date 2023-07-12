@@ -8,24 +8,19 @@ use Illuminate\Http\Request;
 
 class ShowController extends Controller
 {
-    public function showIndex()
+    public function showApp()
     {
-        return view('index');
+        return view('app');
     }
 
     public function showLoginArminForm()
     {
-        return view('Administration.login');
+        return view('login');
     }
 
-    public function showAdminPanel()
+    public function showAdmin()
     {
-        return view('Administration.admin-panel');
-    }
-
-    public function showTest()
-    {
-        return view('test');
+        return view('admin');
     }
 }
 

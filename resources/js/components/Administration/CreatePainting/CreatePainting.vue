@@ -172,7 +172,7 @@ export default {
                 }
 
                 fd.append('sold_status', this.sold)
-                axios.post('/administration/create-painting', fd, {
+                axios.post('/admin/create-painting', fd, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
