@@ -27,7 +27,7 @@ export default {
 a {
     text-decoration: none;
     color: #000;
-    font-size: 11px;
+    font-size: 14px;
     text-transform: uppercase;
 }
 
@@ -37,6 +37,8 @@ a:hover {
 }
 
 .nav-bar {
+    min-height: 400px;
+    height: 100%;
     background-color: #64a0c2;
 }
 </style>

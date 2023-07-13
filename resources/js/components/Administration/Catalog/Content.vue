@@ -1,6 +1,23 @@
 <template>
     <div class="row">
-        <div class="col-2">
+        <div class="col d-flex justify-content-end">
+           <div class="row">
+               <div class="col-1">
+                   <router-link :to="'/admin/edit/' + painting.id">
+                       <img src="../../../images/edit-btn.png" width="20" alt="edit">
+                   </router-link>
+               </div>
+               <div class="col-1">
+                   <img src="../../../images/view-btn.png" alt="view" width="20">
+               </div>
+               <div class="col-1">
+                   <img src="../../../images/delete-btn.png" alt="delete" width="20">
+               </div>
+           </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
             Назва
         </div>
         <div class="col">
@@ -11,7 +28,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-2">
+        <div class="col-4">
             Ціна
         </div>
         <div class="col">
@@ -19,7 +36,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-2">
+        <div class="col-4">
             Рік
         </div>
         <div class="col">
@@ -27,7 +44,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-2">
+        <div class="col-4">
             Опис
         </div>
         <div class="col">
@@ -35,7 +52,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-2">
+        <div class="col-4">
             Розмір
         </div>
         <div class="col">
@@ -47,7 +64,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-2">
+        <div class="col-4">
             Продана
         </div>
         <div class="col" v-if="painting.sold_status === 0">

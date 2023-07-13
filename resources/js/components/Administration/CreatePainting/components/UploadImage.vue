@@ -34,6 +34,10 @@ export default {
         }
     },
 
+    props: {
+        edit: Boolean
+    },
+
     methods: {
         getImages() {
             this.$emit('getImages', this.files)

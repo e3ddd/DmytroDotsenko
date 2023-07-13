@@ -74,14 +74,14 @@ export default {
 
     methods: {
         async login() {
-            const response = axios.get('/administration/login/log', {
+            const response = axios.get('/admin/login/log', {
                 params: {
                     email: this.email,
                     password: this.password
                 }
             }).then((response) => {
                     if(response.data){
-                        location.replace('/administration')
+                        location.replace('/admin')
                     }
                 })
                 .catch((err) => {

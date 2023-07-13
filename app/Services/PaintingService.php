@@ -38,9 +38,9 @@ class PaintingService
         return $this->paintingRepository->storePainting($name, $name_en, $price, $description, $description_en,  $year, $width, $height, $long, $sold_status);
     }
 
-    public function updatePaintingById($paintingId, $param, $value)
+    public function updatePainting($painting_id, $painting)
     {
-        $this->paintingRepository->updatePaintingById($paintingId, $param, $value);
+        $this->paintingRepository->updatePainting($painting_id, $painting);
     }
 
     public function destroyPainting($paintingId)

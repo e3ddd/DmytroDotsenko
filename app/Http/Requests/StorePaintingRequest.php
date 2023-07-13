@@ -24,14 +24,16 @@ class StorePaintingRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'name_en' => 'required',
-            'price' => 'required',
-            'description' => 'required',
-            'description_en' => 'required',
-            'width' => 'required',
-            'height' => 'required',
-            'long' => 'required',
+            'painting' => [
+                'name' => 'required',
+                'name_en' => 'required',
+                'price' => 'required',
+                'description' => 'required',
+                'description_en' => 'required',
+                'width' => 'required',
+                'height' => 'required',
+                'long' => 'required',
+                ],
         ];
     }
 }

@@ -6,8 +6,8 @@ import Login from "./components/Administration/Login.vue";
 
 createApp(Login).mount('#login');
 
-import router from './router.js';
-import router_admin from './router-admin.js';
+import router from './routers/router.js';
+import router_admin from './routers/router-admin.js';
 
 const app = createApp(App);
 const admin = createApp(AdminPanel);

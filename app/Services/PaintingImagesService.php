@@ -31,4 +31,9 @@ class PaintingImagesService
             $this->paintingImagesRepository->storeImages($paintingId,  $image->hashName());
             $this->paintingImagesRepository->saveImages($storeName, $image);
     }
+
+    public function deleteImage($image_id)
+    {
+        $this->paintingImagesRepository->deleteImage($image_id);
+    }
 }

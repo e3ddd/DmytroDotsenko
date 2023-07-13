@@ -18,25 +18,28 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/test', [\App\Http\Controllers\TestController::class, 'test']);
 
-Route::get('/administration/login/log', [LoginController::class, 'login']);
 Route::get('/admin/login', [ShowController::class, 'showLoginArminForm']);
+Route::get('/admin/login/log', [LoginController::class, 'login']);
 
-Route::get('/get-last-painting', [PaintingController::class, 'getLastPainting']);
-Route::get('/get-all-painting-with-pagination', [PaintingController::class, 'getAllPaintingsWithPagination']);
-
-Route::get('/', [ShowController::class, 'showApp']);
-
+Route::prefix('api')
+    ->group(function() {
+        Route::get('/get-painting-by-id', [PaintingController::class, 'getPaintingById']);
+        Route::post('/update-painting', [PaintingController::class, 'updatePainting']);
+        Route::get('/get-last-painting', [PaintingController::class, 'getLastPainting']);
+        Route::get('/get-all-painting-with-pagination', [PaintingController::class, 'getAllPaintingsWithPagination']);
+        Route::post('/create-painting', [PaintingController::class, 'storePainting']);
+        Route::post('/delete-painting-image', [PaintingImagesController::class, 'deleteImage']);
+    });
 
 
 Route::prefix('admin')->middleware('administration')
     ->group(function() {
         Route::get('/', [ShowController::class, 'showAdmin']);
-        Route::post('/create-painting', [PaintingController::class, 'storePainting']);
+        Route::get("{any?}",\App\Http\Controllers\BackendController::class)->where('any', '.*');
     });
 
 Route::group([], function() {
     Route::get('/', [ShowController::class, 'showApp']);
-
+    Route::get("{any?}",\App\Http\Controllers\FrontendController::class)->where('any', '.*');
 });
 
-Route::fallback(\App\Http\Controllers\FrontendController::class);

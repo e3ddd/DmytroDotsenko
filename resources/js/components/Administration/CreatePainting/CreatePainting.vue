@@ -7,142 +7,101 @@
             {{this.alert_message.content}}
         </div>
     </div>
-    <div class="container-fluid pb-5">
-        <div class="col">
-            <div class="row title mt-2">
-                <h5>Добавити роботу</h5>
-            </div>
-            <div class="col d-flex justify-content-center align-items-center">
-                <div class="row">
-                    <div class="col-xxl">
-                        <upload-image
-                            @getImages="onUpdateImages"
-                        />
-                    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="row title mt-2" >
+                    <h5>Добавити роботу</h5>
                 </div>
-            </div>
-            <form @submit.prevent enctype="multipart/form-data">
-            <div class="row mt-2">
-                <div class="col-2"></div>
-                <div class="col">
-                    <div class="row mb-2 p-0">
-                        <div class="col p-0">
-                            <div class="row">
-                                <div class="col-9">
-                                    <label for="">Назва</label>
-                                </div>
-                                <div class="col languages">
-                                    <span @click="language" id="name_ua" :class="this.lang.name._ua">Українська</span>
-                                    /
-                                    <span @click="language" id="name_en" :class="this.lang.name._en">English</span>
-                                </div>
-                            </div>
+                <div class="col d-flex justify-content-center align-items-center">
+                    <div class="row">
+                        <div class="col-xxl">
+                            <upload-image
+                                @getImages="onUpdateImages"
+                            />
                         </div>
-                        <input type="text" name="name" v-model="this.name" :placeholder="'Українська'" v-if="this.lang.name.active === 'name_ua'">
-                        <input type="text" name="name" v-model="this.name_en" :placeholder="'English'" v-if="this.lang.name.active === 'name_en'">
-                    </div>
-                    <div class="row mb-2 p-0">
-                        <label for="">Ціна</label>
-                        <input type="text" name="price" v-model="this.price">
-                    </div>
-                    <div class="row mb-2 p-0">
-                        <div class="col p-0">
-                            <div class="row">
-                                <div class="col-9">
-                                    <label for="">Опис</label>
-                                </div>
-                                <div class="col languages">
-                                    <span @click="language" id="desc_ua" :class="this.lang.desc._ua">Українська</span>
-                                    /
-                                    <span @click="language" id="desc_en" :class="this.lang.desc._en">English</span>
-                                </div>
-                            </div>
-                        </div>
-                        <textarea rows="4" cols="50" name="description" v-model="this.description" v-if="this.lang.desc.active === 'desc_ua'"/>
-                        <textarea rows="4" cols="50" name="description" v-model="this.description_en" v-if="this.lang.desc.active === 'desc_en'"/>
-                    </div>
-                    <div class="row mb-2 p-0">
-                        <label for="">Рік</label>
-                        <input type="text" v-model="this.year">
-                    </div>
 
-                    <div class="row mb-2 p-0">
-                        <label for="">Ширина</label>
-                        <input type="text" v-model="this.width">
-                    </div>
-                    <div class="row mb-2 p-0">
-                        <label for="">Висота</label>
-                        <input type="text" v-model="this.height">
-                    </div>
-                    <div class="row mb-2 p-0">
-                        <label for="">Довжина</label>
-                        <input type="text" v-model="this.long">
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col">
-                            <div class="row">
-                                <div class="col-3 p-0">
-                                    <label for="sold">
-                                        Продана
-                                    </label>
-                                </div>
-                                <div class="col checkbox">
-                                    <input type="checkbox" v-model="this.sold" id="sold">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col p-0 d-flex justify-content-end create-btn">
-                            <button @click="store">Створити</button>
-                        </div>
                     </div>
                 </div>
-                <div class="col-2"></div>
+                <form @submit.prevent enctype="multipart/form-data">
+                    <div class="row mt-2">
+                        <div class="col-2"></div>
+                        <div class="col">
+                            <create-fields
+                                :painting="this.painting"
+                                v-model="this.painting"
+                            />
+                            <div class="col p-0 d-flex justify-content-end create-btn" v-if="!this.edit">
+                                <button @click="store">Створити</button>
+                            </div>
+                            <div class="col p-0 d-flex justify-content-end create-btn" v-if="this.edit">
+                                <button @click="update">Змінити</button>
+                            </div>
+                        </div>
+                        <div class="col-2"></div>
+                    </div>
+                </form>
             </div>
-            </form>
         </div>
     </div>
 </template>
 
 <script>
+import CreateFields from "./components/CreateFields.vue";
 import UploadImage from "./components/UploadImage.vue";
 export default {
     components: {
         UploadImage,
+        CreateFields,
     },
 
     data() {
       return {
-          name: '',
-          name_en: '',
-          price: 0,
-          description: '',
-          description_en: '',
-          year: '',
-          width: 0,
-          height: 0,
-          long: 0,
-          sold: '',
-          images: [],
-          lang: {
-              desc: {
-                  _ua: 'choose',
-                  _en: '',
-                  active: 'desc_ua',
-              },
-              name: {
-                  _ua: 'choose',
-                  _en: '',
-                  active: 'name_ua',
-              },
+          painting: {
+              name: '',
+              name_en: '',
+              price: 0,
+              description: '',
+              description_en: '',
+              year: '',
+              width: 0,
+              height: 0,
+              long: 0,
+              sold_status: '',
           },
+          images: [],
+
           alert_message: {
               type: '',
               content: '',
           },
+          edit: false,
       }
     },
 
+    mounted() {
+        this.editPainting()
+    },
+
     methods: {
+
+        async editPainting(){
+          if(this.$route.params.id != null){
+              this.edit = true;
+                axios.get('/api/get-painting-by-id', {
+                    params: {
+                        id: this.$route.params.id,
+                    }
+            })
+                .then((response) => {
+                        this.painting = response.data
+                })
+                .catch((err) => {
+                    console.log(err.response.data.message)
+                })
+          }
+        },
+
         onUpdateImages(images) {
             if(this.images.length !== 0){
                 this.images = []
@@ -150,8 +109,55 @@ export default {
             this.images.push(images)
         },
 
+        async update() {
+            let fd = new FormData()
 
-       async store() {
+            if(this.painting.sold_status){
+                this.painting.sold_status = 1
+            }
+
+            if(!this.painting.sold_status){
+                this.painting.sold_status = 0
+            }
+
+            fd.append('painting[name]', this.painting.name)
+            fd.append('painting[name_en]', this.painting.name_en)
+            fd.append('painting[price]', this.painting.price)
+            fd.append('painting[description]', this.painting.description)
+            fd.append('painting[description_en]', this.painting.description_en)
+            fd.append('painting[year]', this.painting.year)
+            fd.append('painting[width]', this.painting.width)
+            fd.append('painting[height]', this.painting.height)
+            fd.append('painting[long]', this.painting.long)
+            fd.append('painting[sold_status]', this.painting.sold_status)
+
+            fd.append('painting_id', this.$route.params.id)
+
+            axios.post('/api/update-painting', fd, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+                .then((response) => {
+                    this.alert_message.type = 'success'
+                    this.alert_message.content = 'Зміни внесені до каталогу'
+
+                    setTimeout(() => {
+                        this.alert_message.type = ''
+                        this.alert_message.content = ''
+                    }, 5000)
+                })
+                .catch(err => {
+                    this.alert_message.content = err.response.data.message
+                    this.alert_message.type = 'error'
+                    setTimeout(() => {
+                        this.alert_message.type = ''
+                        this.alert_message.content = ''
+                    }, 5000)
+                })
+        },
+
+        async store() {
             if(this.images.length !== 0){
                 let fd = new FormData()
                 this.images[0].map((item, key) => fd.append('images[' + key + ']', item.file, item.file.name));
@@ -172,7 +178,7 @@ export default {
                 }
 
                 fd.append('sold_status', this.sold)
-                axios.post('/admin/create-painting', fd, {
+                axios.post('/api/create-painting', fd, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
@@ -207,22 +213,6 @@ export default {
                     })
             }
        },
-
-        language(e) {
-            const lang = e.target.id.substr(-3)
-            const field = e.target.id.replace(lang, '')
-
-            for (const lang in this.lang[field]) {
-                if(lang !== 'active'){
-                    if(this.lang[field][lang] !== ''){
-                        this.lang[field][lang] = ''
-                    }
-                }
-            }
-
-            this.lang[field][lang] = 'choose'
-            this.lang[field].active = e.target.id
-        }
     }
 
 }
@@ -252,29 +242,4 @@ export default {
     background: #00ba0c;
 }
 
-.choose {
-    color: #006bf7;
-}
-
-span {
-    cursor: pointer;
-}
-
-.checkbox {
-    margin-top: 4px;
-    padding: 0 !important;
-}
-
-label {
-    font-size: 12px;
-    padding: 0;
-}
-
-.languages {
-    font-size: 12px;
-}
-
-::placeholder {
-    font-size: 12px;
-}
 </style>

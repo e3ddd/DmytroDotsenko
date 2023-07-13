@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('width');
             $table->integer('height');
             $table->integer('long');
-            $table->integer('sold_status');
+            $table->boolean('sold_status');
             $table->index(['name']);
             $table->timestamps();
         });

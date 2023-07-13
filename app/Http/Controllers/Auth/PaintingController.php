@@ -51,9 +51,9 @@ class PaintingController extends Controller
         }
     }
 
-    public function updatePaintingById(Request $request)
+    public function updatePainting(StorePaintingRequest $request)
     {
-        $this->paintingService->updatePaintingById($request->paintingId, $request->param, $request->value);
+        $this->paintingService->updatePainting($request->painting_id, $request->painting);
     }
 
     public function destroyPainting(Request $request)

@@ -1,13 +1,13 @@
 <template>
     <div class="row">
         <div class="col">
-            <a :href="'#/edit'"><img src="../../../edit-btn.png" width="20" alt="edit"></a>
+            <a :href="'#/edit'"><img src="../../../images/edit-btn.png" width="20" alt="edit"></a>
         </div>
         <div class="col">
-            <a :href="'#/delete'"><img src="../../../delete-btn.png" width="20" alt="delete"></a>
+            <a :href="'#/delete'"><img src="../../../images/delete-btn.png" width="20" alt="delete"></a>
         </div>
         <div class="col">
-            <a :href="'#/view'"><img src="../../../view-btn.png" width="20" alt="view"></a>
+            <a :href="'#/view'"><img src="../../../images/view-btn.png" width="20" alt="view"></a>
         </div>
     </div>
 </template>

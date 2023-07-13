@@ -47,14 +47,16 @@ class PaintingRepository implements CheckNullableInterface
 
     public function getPaintingById($paintingId)
     {
-        $this->checkNullable($paintingId);
-
-        return $this->painting->find($paintingId);
+        return $this->painting->with('images')->find($paintingId);
     }
 
     public function storePainting($name, $name_en, $price, $description, $description_en, $year, $width, $height, $long, $sold_status)
     {
         $this->checkNullable([$name, $name_en, $price, $description, $description_en, $year, $width, $height, $long, $sold_status]);
+
+        if($sold_status){
+            $sold_status = 1;
+        }
 
         $this->painting->create([
             'name' => $name,
@@ -72,13 +74,11 @@ class PaintingRepository implements CheckNullableInterface
         return $this->painting->all()->last()->id;
     }
 
-    public function updatePaintingById($paintingId, $param, $value)
+    public function updatePainting($painting_id, $painting)
     {
-        $this->checkNullable([$paintingId, $param, $value]);
+        $this->checkNullable($painting);
 
-        $painting = $this->painting->find($paintingId);
-
-        $painting->update([$param => $value]);
+        Painting::find($painting_id)->update($painting);
     }
 
     public function destroyPainting($paintingId)

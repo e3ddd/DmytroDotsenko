@@ -64,4 +64,15 @@ class PaintingImagesRepository implements CheckNullableInterface
             ImageProcess::process($imgPath);
         }
     }
+
+    public function deleteImage($image_id)
+    {
+        $image = PaintingImage::findOrFail($image_id);
+
+        if(Storage::disk('public')->exists('/images/' . $image->painting_id . '_' . $image->hash_id)){
+            Storage::disk('public')->delete('/images/' . $image->painting_id . '_' . $image->hash_id);
+        }
+
+        $image->delete();
+    }
 }

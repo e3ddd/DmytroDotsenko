@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { defineAsyncComponent } from "vue";
 
-const Catalog = defineAsyncComponent(() => import ("./components/Administration/Catalog/Catalog.vue"));
-const CreatePainting = defineAsyncComponent(() => import ("./components/Administration/CreatePainting/CreatePainting.vue"));
+const Catalog = defineAsyncComponent(() => import ("../components/Administration/Catalog/Catalog.vue"));
+const CreatePainting = defineAsyncComponent(() => import ("../components/Administration/CreatePainting/CreatePainting.vue"));
 
 const routes = [
     {
@@ -11,6 +11,10 @@ const routes = [
     },
     {
         path: '/admin/create',
+        component: CreatePainting,
+    },
+    {
+        path: '/admin/edit/:id',
         component: CreatePainting,
     },
 ];

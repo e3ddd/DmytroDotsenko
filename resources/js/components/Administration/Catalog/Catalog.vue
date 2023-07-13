@@ -64,7 +64,7 @@ export default {
 
         async getPaintings(page){
             this.loading = true
-            axios.get('/get-all-painting-with-pagination?page=' + page, )
+            axios.get('/api/get-all-painting-with-pagination?page=' + page, )
                 .then((response) => {
                     this.paintings = response.data.data
                     this.total = Math.ceil(response.data.total / response.data.per_page)

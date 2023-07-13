@@ -40,8 +40,8 @@ export default {
 
 .panel {
     background-color: #a3adb2;
-    width: 1400px;
     opacity: 0.75;
+    min-height: 400px;
 }
 
 </style>
