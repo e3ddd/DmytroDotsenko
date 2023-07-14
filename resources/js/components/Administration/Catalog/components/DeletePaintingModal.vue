@@ -1,19 +1,19 @@
 <template>
-    <div class="attention_modal" v-if="show" @click="this.$emit('show', show = !show)">
-        <div @click.stop class="attention_item">
+    <div class="delete_modal" @click="this.$emit('show', false)">
+        <div @click.stop class="delete_item">
             <div class="row">
                 <div class="col d-flex justify-content-center align-items-center">
                     <h5>
-                        Видалити зображення ?
+                        Видалити роботу "{{name}}" ?
                     </h5>
                 </div>
             </div>
             <div class="row btns">
                 <div class="col-3"></div>
-                <div class="col-4 agree btns" @click="del">
+                <div class="col-4 agree btns" @click="deletePainting">
                     Так
                 </div>
-                <div class="col-4 disagree btns" @click="this.$emit('show', show = !show)">
+                <div class="col-4 disagree btns" @click="this.$emit('show', false)">
                      Ні
                 </div>
                 <div class="col-2"></div>
@@ -25,24 +25,20 @@
 <script>
 export default {
     props: {
-        show: Boolean,
-        image_id: Number,
-    },
-
-    data() {
-        return {
-        }
+        name: String,
+        painting_id: Number,
     },
 
     methods: {
-       async del() {
-           axios.post('/api/delete-painting-image', {
-               image_id: this.image_id
-           })
-               .catch(err => console.log(err))
-
-           this.$emit('show', !this.show)
-       }
+        async deletePainting(){
+            axios.post('/api/delete-painting', {
+                paintingId: this.painting_id
+            })
+                .catch(err => console.log(err))
+                .finally(() => {
+                    location.reload()
+                })
+        }
     }
 }
 </script>
@@ -63,12 +59,18 @@ a {
     transition: 0.2s;
 }
 
+.agree:hover {
+    color: red;
+    transition: 0.2s;
+    font-size: 18px;
+}
+
 .disagree:hover {
     font-size: 18px;
     transition: 0.2s;
 }
 
-.attention_modal {
+.delete_modal {
     top: 0;
     bottom: 0;
     right: 0;
@@ -76,9 +78,10 @@ a {
     background: rgba(0,0,0,0.5);
     position: fixed;
     display: flex;
+    z-index: 100;
 }
 
-.attention_item {
+.delete_item {
     padding: 15px;
     margin: auto;
     background: white;

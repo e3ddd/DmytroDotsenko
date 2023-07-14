@@ -25,6 +25,11 @@ class PaintingImagesController extends Controller
         return $this->paintingImagesService->getImageById($request->imageId);
     }
 
+    public function storeImage(Request $request)
+    {
+        $this->paintingImagesService->storeImages($request->painting_id, $request->image);
+    }
+
     public function deleteImage(Request $request)
     {
         $this->paintingImagesService->deleteImage($request->image_id);

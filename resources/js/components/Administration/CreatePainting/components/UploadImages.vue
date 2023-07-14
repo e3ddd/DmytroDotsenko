@@ -8,13 +8,13 @@
         </div>
         <input type="file" id="upload-painting" @input="getImages" @change="onFileChange">
     </div>
-    <div class="row images">
-        <div class="col">
-            <div class="row" style="max-width: 617px;">
-                <div class="col-3 p-0 mt-1 d-flex justify-content-center align-items-center" v-for="image in this.files">
+    <div class="row ">
+        <div class="col" style="width: 700px !important;">
+            <div class="row">
+                <div class="col-3 mt-1 d-flex justify-content-center align-items-center" v-for="image in this.files">
                     <img :src="image.url" alt="image" height="100" @click="deleteImage" :id="image.id">
                 </div>
-                <div class="col-3 p-0 mt-1 upload-image" v-if="this.files.length !== 0">
+                <div class="col-2 mt-1 d-flex justify-content-center align-items-center upload-image" v-if="this.files.length !== 0">
                     <label for="upload-painting">
                         +
                     </label>
@@ -32,10 +32,6 @@ export default {
             files: [],
             imagesCount: 0
         }
-    },
-
-    props: {
-        edit: Boolean
     },
 
     methods: {
@@ -89,9 +85,6 @@ label {
 /*}*/
 
 .upload-image {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     margin-top: 8px;
     height: 100px;
     /*max-width: 100px;*/

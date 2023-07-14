@@ -38,11 +38,7 @@ class PaintingController extends Controller
 
     public function storePainting(StorePaintingRequest $request)
     {
-        $paintingId = $this->paintingService->storePainting(
-            $request->name, $request->name_en, $request->price,
-            $request->description, $request->description_en,
-            $request->year, $request->width, $request->height,
-            $request->long, $request->sold_status);
+        $paintingId = $this->paintingService->storePainting($request->painting);
 
         if($paintingId){
             foreach ($request->images as $image){

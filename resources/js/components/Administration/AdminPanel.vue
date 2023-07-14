@@ -6,7 +6,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-2 p-0">
+            <div class="col p-0 nav-bar">
                <navbar/>
             </div>
             <div class="col-10">
@@ -39,9 +39,7 @@ export default {
 }
 
 .panel {
-    background-color: #a3adb2;
-    opacity: 0.75;
-    min-height: 400px;
+    background-color: #d3d3d3;
+    min-height: 100%;
 }
-
 </style>

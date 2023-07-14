@@ -4,7 +4,12 @@
             <div class="col p-3 links">
                 <div class="row">
                     <div class="col mt-2 link">
-                        <router-link to="/admin/create">Добавити роботу</router-link>
+                        <router-link to="/admin/categories">Список категорій</router-link>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col mt-2 link">
+                        <router-link to="/admin/create">Додати роботу</router-link>
                     </div>
                 </div>
                 <div class="row">
@@ -24,6 +29,7 @@ export default {
 </script>
 
 <style scoped>
+
 a {
     text-decoration: none;
     color: #000;
@@ -37,7 +43,6 @@ a:hover {
 }
 
 .nav-bar {
-    min-height: 400px;
     height: 100%;
     background-color: #64a0c2;
 }

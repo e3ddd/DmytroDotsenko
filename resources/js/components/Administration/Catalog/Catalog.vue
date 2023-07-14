@@ -31,8 +31,8 @@
 </template>
 
 <script>
-import Images from "./Images.vue";
-import Content from "./Content.vue";
+import Images from "./components/Images.vue";
+import Content from "./components/Content.vue";
 import Loader from "../../UI/Loader.vue";
 import PagePagination from "../../Pagination.vue";
 export default {
@@ -56,10 +56,8 @@ export default {
         },
 
     methods: {
-
         onUpdate(paintings) {
             this.paintings = paintings
-
         },
 
         async getPaintings(page){

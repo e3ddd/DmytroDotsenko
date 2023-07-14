@@ -7,6 +7,7 @@
     <style>
         body {
             overflow-x: hidden !important;
+            height: 100% !important;
         }
     </style>
 
