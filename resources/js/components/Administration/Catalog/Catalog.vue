@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container catalog">
         <div class="row">
             <div class="col d-flex justify-content-center align-items-center" style="padding: 300px" v-if="this.loading">
                 <loader/>
@@ -11,7 +11,7 @@
                             :images="painting.images"
                         />
                     </div>
-                    <div class="col pt-4">
+                    <div class="col-7 pt-4">
                         <content
                             :painting="painting"
                         />
@@ -82,4 +82,5 @@ export default {
     position: relative;
     z-index: 99;
 }
+
 </style>

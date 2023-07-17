@@ -1,15 +1,15 @@
 <template>
-    <div class="container-fluid panel">
+    <div class="container-fluid page">
         <div class="row head">
             <div class="col pt-2">
                 <span>Dmytro Dotsenko</span>
             </div>
         </div>
-        <div class="row">
+        <div class="row panel">
             <div class="col p-0 nav-bar">
                <navbar/>
             </div>
-            <div class="col-10">
+            <div class="col-10 content">
                 <router-view></router-view>
             </div>
         </div>
@@ -28,6 +28,10 @@ export default {
 
 <style scoped>
 
+.page {
+    height: 100%;
+}
+
 .head span {
     color: #fff;
     margin: 0;
@@ -39,7 +43,13 @@ export default {
 }
 
 .panel {
+    min-height: 100vh;
     background-color: #d3d3d3;
-    min-height: 100%;
 }
+
+.nav-bar {
+    min-height: 100vh;
+}
+
+
 </style>

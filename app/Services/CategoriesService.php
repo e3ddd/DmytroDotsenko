@@ -22,4 +22,14 @@ class CategoriesService
     {
         $this->categoriesRepository->storeCategory($category);
     }
+
+    public function updateCategory($category)
+    {
+        $this->categoriesRepository->updateCategory($category);
+    }
+
+    public function deleteCategory($category_id)
+    {
+        $this->categoriesRepository->deleteCategory($category_id);
+    }
 }

@@ -3,7 +3,7 @@
         <div @click.stop class="create-category-item">
             <div class="row">
                 <div class="col-9">
-                    <label for="">Назва категорії</label>
+                    <h5>Назва категорії</h5>
                 </div>
                 <div class="col languages">
                     <span @click="language" id="name_ua" :class="this.lang.name._ua">Українська</span>
@@ -23,6 +23,21 @@
                     <label for="">Батьківська категорія</label>
                 </div>
             </div>
+            <div class="row" v-if="this.category.parent_id !== true">
+                <div class="col pt-2 pb-2">
+                    <div class="row mb-2">
+                        <label for="">Обрати батьківську категорію</label>
+                    </div>
+                    <div class="row">
+                        <select name="categories" id="" v-model="this.category.parent_id">
+                            <option disabled>Батьківська категорія...</option>
+                            <option :value="category.id" v-for="category in categories">
+                                {{category.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col d-flex justify-content-end align-items-end mt-2 p-0">
                     <button @click="store">Стровити</button>
@@ -36,12 +51,6 @@
 export default {
     data() {
         return {
-            category: {
-                name: '',
-                name_en: '',
-                parent_id: 0,
-            },
-
             lang: {
                 name: {
                     _ua: 'choose',
@@ -49,10 +58,27 @@ export default {
                     active: 'name_ua',
                 },
             },
+
+            category: {
+                name: '',
+                name_en: '',
+                parent_id: '',
+            },
+
+            alert_message: {
+                type: '',
+                content: '',
+            },
         }
     },
 
+
+    props: {
+        categories: Array,
+    },
+
     methods: {
+
         language(e) {
             const lang = e.target.id.substr(-3)
             const field = e.target.id.replace(lang, '')
@@ -70,23 +96,36 @@ export default {
         },
 
         async store(){
-
-            if(this.category.parent_id){
+            if(this.category.parent_id === true){
                 this.category.parent_id = null
             }
 
             axios.post('/api/store-category', {
                 category: this.category
             })
-                .then(response => console.log(response))
-                .catch(err => console.log(err))
-        }
+                .then((response) => {
+                    this.alert_message.type = 'success'
+                    this.alert_message.content = 'Категорію додано'
+
+                    this.$emit('alert', this.alert_message)
+                })
+                .catch((err) => {
+                    this.alert_message.content = err.response.data.message
+                    this.alert_message.type = 'error'
+
+                    this.$emit('alert', this.alert_message)
+                })
+        },
     }
 
 }
 </script>
 
 <style scoped>
+
+label {
+    font-size: 14px;
+}
 
 .choose {
     color: #006bf7;
@@ -118,5 +157,6 @@ export default {
     justify-content: end;
     font-size: 12px;
 }
+
 
 </style>

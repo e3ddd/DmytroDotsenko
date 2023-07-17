@@ -1,7 +1,10 @@
 import './bootstrap';
+
 import {createApp} from 'vue';
+
 import App from "./App.vue";
 import AdminPanel from "./components/Administration/AdminPanel.vue";
+
 import Login from "./components/Administration/Login.vue";
 
 createApp(Login).mount('#login');

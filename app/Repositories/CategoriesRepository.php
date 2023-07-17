@@ -40,4 +40,21 @@ class CategoriesRepository implements CheckNullableInterface
     {
         $this->category->create($category);
     }
+
+    public function updateCategory($category)
+    {
+        $this->checkNullable($category);
+
+        Category::find($category['category_id'])->update($category);
+    }
+
+    public function deleteCategory($category_id)
+    {
+        if(Category::where('parent_id', $category_id)->exists()){
+            throw new RuntimeException('This category is parent and has children !');
+        }
+
+        Category::destroy($category_id);
+    }
+
 }

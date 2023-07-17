@@ -43,7 +43,6 @@ a:hover {
 }
 
 .nav-bar {
-    height: 100%;
     background-color: #64a0c2;
 }
 </style>

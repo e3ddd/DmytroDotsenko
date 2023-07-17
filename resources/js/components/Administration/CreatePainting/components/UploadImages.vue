@@ -9,12 +9,12 @@
         <input type="file" id="upload-painting" @input="getImages" @change="onFileChange">
     </div>
     <div class="row ">
-        <div class="col" style="width: 700px !important;">
+        <div class="col" style="max-width: 700px !important;;">
             <div class="row">
-                <div class="col-3 mt-1 d-flex justify-content-center align-items-center" v-for="image in this.files">
+                <div class="col-4 mt-1 d-flex justify-content-center align-items-center" v-for="image in this.files">
                     <img :src="image.url" alt="image" height="100" @click="deleteImage" :id="image.id">
                 </div>
-                <div class="col-2 mt-1 d-flex justify-content-center align-items-center upload-image" v-if="this.files.length !== 0">
+                <div class="col-4 mt-1 d-flex justify-content-center align-items-center upload-image" v-if="this.files.length !== 0">
                     <label for="upload-painting">
                         +
                     </label>
@@ -80,14 +80,10 @@ label {
     border: 1px solid black;
 }
 
-/*.images {*/
-/*    max-width: 410px !important;*/
-/*}*/
-
 .upload-image {
     margin-top: 8px;
     height: 100px;
-    /*max-width: 100px;*/
     border: 1px solid black;
+    max-width: 150px;
 }
 </style>
