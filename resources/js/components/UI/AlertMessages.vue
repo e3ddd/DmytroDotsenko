@@ -1,20 +1,17 @@
 <template>
     <div class="row alert_message">
-        <div class="col error" v-if="type === 'error'">
-            {{content}}
+        <div class="col error" v-if="$store.getters.getMessage.type === 'error'">
+            {{$store.getters.getMessage.content}}
         </div>
-        <div class="col success" v-if="type === 'success'">
-            {{content}}
+        <div class="col success" v-if="$store.getters.getMessage.type === 'success'">
+            {{$store.getters.getMessage.content}}
         </div>
     </div>
 </template>
 
 <script>
 export default {
-   props: {
-       type: String,
-       content: String,
-   }
+
 }
 </script>
 

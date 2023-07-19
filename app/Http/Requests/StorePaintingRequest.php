@@ -33,6 +33,7 @@ class StorePaintingRequest extends FormRequest
                 'width' => 'required',
                 'height' => 'required',
                 'long' => 'required',
+                'category_id' => 'required',
                 ],
         ];
     }

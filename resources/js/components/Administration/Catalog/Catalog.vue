@@ -5,7 +5,7 @@
                 <loader/>
             </div>
             <div class="col">
-                <div class="row" v-for="painting in this.paintings">
+                <div class="row" v-for="painting in $store.getters.getAllPaintings">
                     <div class="col-5 pt-4 images">
                         <images
                             :images="painting.images"
@@ -19,11 +19,10 @@
                 </div>
             </div>
         </div>
-        <div class="row" v-if="this.paintings.length !== 0">
+        <div class="row">
             <PagePagination
                 v-if="this.total"
                 :total="this.total"
-                :get="this.getPaintings"
                 @update="this.onUpdate"
             />
         </div>
@@ -44,35 +43,22 @@ export default {
     },
     data() {
         return {
-            paintings: [],
             total: 0,
             page: 1,
             loading: false,
         }
     },
 
-    mounted() {
-            this.getPaintings(this.page)
-        },
 
     methods: {
         onUpdate(paintings) {
-            this.paintings = paintings
+             this.$store.commit('setPaintings', paintings)
         },
-
-        async getPaintings(page){
-            this.loading = true
-            axios.get('/api/get-all-painting-with-pagination?page=' + page, )
-                .then((response) => {
-                    this.paintings = response.data.data
-                    this.total = Math.ceil(response.data.total / response.data.per_page)
-                })
-                .catch(err => console.log(err))
-                .finally(() => {
-                    this.loading = false
-                })
-        }
     },
+
+    mounted() {
+        this.$store.dispatch('getPaintings')
+    }
 
 }
 </script>

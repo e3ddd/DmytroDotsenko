@@ -1,5 +1,24 @@
 <template>
     <div class="row mb-2 p-0">
+        <div class="col p-0">
+            <div class="row">
+                <div class="col">
+                    <label for="">Категорія</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <select name="categories" v-model="painting.category_id">
+                        <option disabled selected>Обрати категорію...</option>
+                        <option :value="category.id" v-for="category in $store.getters.getAllCategories">
+                            {{category.name}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-2 p-0">
     <div class="col p-0">
             <div class="row">
                 <div class="col-9">
@@ -94,6 +113,7 @@ export default {
     },
 
     methods: {
+
         language(e) {
             const lang = e.target.id.substr(-3)
             const field = e.target.id.replace(lang, '')

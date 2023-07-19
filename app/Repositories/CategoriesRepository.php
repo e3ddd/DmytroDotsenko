@@ -36,6 +36,11 @@ class CategoriesRepository implements CheckNullableInterface
         return $this->category->all();
     }
 
+    public function getParentCategories()
+    {
+        return $this->category->where('parent_id', null)->get();
+    }
+
     public function storeCategory($category)
     {
         $this->category->create($category);

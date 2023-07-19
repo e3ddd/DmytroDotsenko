@@ -1,8 +1,5 @@
 <template>
-    <alert-messages
-        :type="this.alert_message.type"
-        :content="this.alert_message.content"
-    />
+    <alert-messages/>
     <div class="container">
         <div class="row">
             <div class="col">
@@ -64,14 +61,14 @@ export default {
               height: 0,
               long: 0,
               sold_status: '',
+              category_id: '',
           },
           images: [],
-
-          alert_message: {
-              type: '',
-              content: '',
-          },
       }
+    },
+
+    mounted() {
+        this.$store.dispatch('getCategories')
     },
 
     methods: {
@@ -95,6 +92,7 @@ export default {
                 fd.append('painting[width]', this.painting.width)
                 fd.append('painting[height]', this.painting.height)
                 fd.append('painting[long]', this.painting.long)
+                fd.append('painting[category_id]', this.painting.category_id)
 
                 if(this.painting.sold_status){
                     this.painting.sold_status = 1
@@ -109,8 +107,10 @@ export default {
                     }
                 })
                     .then((response) => {
-                        this.alert_message.type = 'success'
-                        this.alert_message.content = 'Картина додана до каталогу'
+                        this.$store.commit('setMessage', {
+                            type: 'success',
+                            content: 'Роботу додано у каталог',
+                        })
 
                         this.images = []
                         this.name = ''
@@ -123,18 +123,20 @@ export default {
                         this.height = ''
                         this.long = ''
 
-                        setTimeout(() => {
-                            this.alert_message.type = ''
-                            this.alert_message.content = ''
-                        }, 5000)
                     })
                     .catch((err) => {
-                        this.alert_message.content = err.response.data.message
-                        this.alert_message.type = 'error'
+                        this.$store.commit('setMessage', {
+                            type: 'error',
+                            content: err.response.data.message,
+                        })
+                    })
+                    .finally(() => {
                         setTimeout(() => {
-                            this.alert_message.type = ''
-                            this.alert_message.content = ''
-                        }, 5000)
+                            this.$store.commit('setMessage', {
+                                type: '',
+                                content: '',
+                            })
+                        },3000)
                     })
             }
        },

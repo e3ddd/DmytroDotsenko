@@ -20,6 +20,11 @@ class CategoriesController extends Controller
         return $this->categoryService->getAllCategories();
     }
 
+    public function getParentCategories()
+    {
+        return $this->categoryService->getParentCategories();
+    }
+
     public function storeCategory(CreateCategoryRequest $request)
     {
         $this->categoryService->storeCategory($request->category);

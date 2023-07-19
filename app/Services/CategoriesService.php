@@ -18,6 +18,11 @@ class CategoriesService
         return $this->categoriesRepository->getAllCategories();
     }
 
+    public function getParentCategories()
+    {
+        return $this->categoriesRepository->getParentCategories();
+    }
+
     public function storeCategory($category)
     {
         $this->categoriesRepository->storeCategory($category);

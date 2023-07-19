@@ -1,13 +1,8 @@
 <template>
-    <alert-messages
-        :type="this.alert_message.type"
-        :content="this.alert_message.content"
-    />
+    <alert-messages/>
     <create-category-model
-        :categories="this.categories"
         v-if="show"
         @show="closeModal"
-        @alert="alertMessage"
     />
     <div class="container">
         <div class="row">
@@ -26,11 +21,11 @@
                        <span @click="this.show = true"><b>+ Додати категорію</b></span>
                     </div>
                 </div>
-                <div class="row d-flex justify-content-center align-items-center loader" v-if="this.loading">
-                    <loader/>
-                </div>
             </div>
-            <div class="row categories pt-2" v-for="category in this.categories">
+            <div class="row d-flex justify-content-center align-items-center loader" v-if="$store.getters.getLoadingState">
+                <loader/>
+            </div>
+            <div class="row categories pt-2" v-for="category in $store.getters.getAllCategories" v-if="$store.getters.getLoadingState === false">
                 <div class="col-3 d-flex justify-content-center align-items-center">
                     {{category.name}}
                 </div>
@@ -66,72 +61,59 @@ export default {
     },
     data(){
         return {
-            categories: [],
-            loading: false,
             show: false,
-
-            alert_message: {
-                type: '',
-                content: '',
-            },
         }
     },
 
     methods: {
         async deleteCategory(e){
-
             axios.post('/api/delete-category', {
                 category_id: e.target.id
             })
                 .then(() => {
-                    this.alert_message.type = 'success'
-                    this.alert_message.content = 'Категорія видалена'
-                    this.categories = this.categories.filter(item => item.id != e.target.id)
+                    this.$store.commit('setMessage', {
+                        type: 'success',
+                        content: 'Категорія видалена',
+                    })
+                    this.$store.commit('deleteCategory', e.target.id)
                 })
                 .catch((err) => {
-                    this.alert_message.content = err.response.data.message
-                    this.alert_message.type = 'error'
+                    this.$store.commit('setMessage', {
+                        type: 'error',
+                        content: err.response.data.message,
+                    })
                 })
                 .finally(() => {
                     setTimeout(() => {
-                        this.alert_message.type = ''
-                        this.alert_message.content = ''
-                    }, 5000)
+                        this.$store.commit('setMessage', {
+                            type: '',
+                            content: '',
+                        })
+                    },3000)
                 })
-        },
-
-        alertMessage(alertMessage) {
-            this.alert_message.type = alertMessage.type
-            this.alert_message.content = alertMessage.content
-
-            this.show = false
-
-            setTimeout(() => {
-                this.alert_message.type = ''
-                this.alert_message.content = ''
-                // location.reload()
-            }, 5000)
         },
 
         closeModal(show){
           this.show = show
         },
 
+        getCategories(){
+            this.$store.commit('setLoadingState', true)
+            this.$store.dispatch('getCategories');
 
-        async getAllCategories(){
-          this.loading = true
-          axios.get('/api/get-all-categories')
-              .then((response) => {
-                  this.categories = response.data
-                  this.loading = false
-              })
-              .catch(err => console.log(err))
-
+            setTimeout(() => {
+                if(this.$store.getters.getAllCategories != []){
+                    this.$store.commit('setLoadingState', false)
+                }
+            }, 100)
         }
+
     },
 
     mounted() {
-        this.getAllCategories()
+        this.getCategories()
+
+        this.$store.dispatch('getParentCategories');
     },
 
 }

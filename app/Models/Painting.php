@@ -21,7 +21,8 @@ class Painting extends Model
         'width',
         'height',
         'long',
-        'sold_status'
+        'sold_status',
+        'category_id'
     ];
 
     public function images()

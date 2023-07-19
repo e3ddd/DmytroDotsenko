@@ -30,8 +30,8 @@
                     </div>
                     <div class="row">
                         <select name="categories" id="" v-model="this.category.parent_id">
-                            <option disabled>Батьківська категорія...</option>
-                            <option :value="category.id" v-for="category in categories">
+                            <option disabled selected>Батьківська категорія...</option>
+                            <option :value="category.id" v-for="category in $store.getters.getParentCategories">
                                 {{category.name}}
                             </option>
                         </select>
@@ -64,17 +64,7 @@ export default {
                 name_en: '',
                 parent_id: '',
             },
-
-            alert_message: {
-                type: '',
-                content: '',
-            },
         }
-    },
-
-
-    props: {
-        categories: Array,
     },
 
     methods: {
@@ -104,16 +94,24 @@ export default {
                 category: this.category
             })
                 .then((response) => {
-                    this.alert_message.type = 'success'
-                    this.alert_message.content = 'Категорію додано'
-
-                    this.$emit('alert', this.alert_message)
+                    this.$store.commit('setMessage', {
+                        type: 'success',
+                        content: 'Категорію додано',
+                    })
                 })
                 .catch((err) => {
-                    this.alert_message.content = err.response.data.message
-                    this.alert_message.type = 'error'
-
-                    this.$emit('alert', this.alert_message)
+                    this.$store.commit('setMessage', {
+                        type: 'error',
+                        content: err.response.data.message,
+                    })
+                })
+                .finally(() => {
+                    setTimeout(() => {
+                        this.$store.commit('setMessage', {
+                            type: '',
+                            content: '',
+                        })
+                    },3000)
                 })
         },
     }
