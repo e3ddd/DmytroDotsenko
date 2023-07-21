@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { defineAsyncComponent } from "vue";
 
-const Categories = defineAsyncComponent(() => import ("../components/Administration/Categories/Categories.vue"));
-const Catalog = defineAsyncComponent(() => import ("../components/Administration/Catalog/Catalog.vue"));
-const CreatePainting = defineAsyncComponent(() => import ("../components/Administration/CreatePainting/CreatePainting.vue"));
-const UpdatePainting = defineAsyncComponent(() => import("../components/Administration/CreatePainting/UpdatePainting.vue"))
+const Categories = defineAsyncComponent(() => import ("../components/Backend/Categories/Categories.vue"));
+const Catalog = defineAsyncComponent(() => import ("../components/Backend/Catalog/Catalog.vue"));
+const CreatePainting = defineAsyncComponent(() => import ("../components/Backend/CreatePainting/CreatePainting.vue"));
+const UpdatePainting = defineAsyncComponent(() => import("../components/Backend/CreatePainting/UpdatePainting.vue"))
 
 const routes = [
     {

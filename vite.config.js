@@ -6,7 +6,6 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
-                'resources/sass/app.scss',
                 'resources/js/app.js',
             ],
             refresh: true,
@@ -20,6 +19,13 @@ export default defineConfig({
             },
         }),
     ],
+
+    build:{
+        rollupOptions: {
+            external: '/home/stephan/workspace/DmytroDotsenko/resources/js/routers/router.js'
+        }
+    },
+
     resolve: {
         alias: {
             vue: 'vue/dist/vue.esm-bundler.js',

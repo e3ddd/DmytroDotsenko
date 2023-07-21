@@ -31,7 +31,7 @@ class ImageProcess
             0
         );
         $imagickDst->setImageFormat("jpg");
-        $imagickSrc->resizeImage(1024,768,0,1);
+        $imagickSrc->resizeImage(1920, 1080,0,1);
         $imagickSrc->writeImage($imgPath);
     }
 }

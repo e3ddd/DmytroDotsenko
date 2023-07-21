@@ -2,7 +2,7 @@
     <div class="paginator">
         <button class="hlpbtn" @click="changePage(page - 1)">&lt;</button>
         <div
-            v-for="pageNumber in total"
+            v-for="pageNumber in this.$store.getters.getTotalValue"
             :key="pageNumber"
             class="page"
             :class="{
@@ -18,11 +18,6 @@
 
 <script>
 export default {
-    props: {
-        total: Number,
-        get: Function
-    },
-
     data() {
         return {
             page: 1,
@@ -33,10 +28,10 @@ export default {
     methods: {
         changePage(pageNumber) {
             if(pageNumber < 1) pageNumber = 1
-            if(pageNumber > this.total) pageNumber = this.total
+            if(pageNumber > this.$store.getters.getTotalValue) pageNumber = this.$store.getters.getTotalValue
             this.$emit('update', this.paintings)
             this.page = pageNumber
-            this.get(this.page)
+            this.$store.dispatch('getPaintings', this.page)
         },
     }
 }

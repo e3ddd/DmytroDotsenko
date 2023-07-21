@@ -26,6 +26,7 @@ Route::prefix('api')
     ->group(function() {
         Route::get('/get-all-categories', [CategoriesController::class, 'getAllCategories']);
         Route::get('/get-parent-categories', [CategoriesController::class, 'getParentCategories']);
+        Route::get('/get-subcategories', [CategoriesController::class, 'getSubcategories']);
         Route::post('/store-category', [CategoriesController::class, 'storeCategory']);
         Route::post('/delete-category', [CategoriesController::class, 'deleteCategory']);
         Route::post('/update-category', [CategoriesController::class, 'updateCategory']);

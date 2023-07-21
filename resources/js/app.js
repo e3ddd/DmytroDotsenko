@@ -3,9 +3,10 @@ import './bootstrap';
 import {createApp} from 'vue';
 
 import App from "./App.vue";
-import AdminPanel from "./components/Administration/AdminPanel.vue";
 
-import Login from "./components/Administration/Login.vue";
+import AdminPanel from "./components/Backend/AdminPanel.vue";
+
+import Login from "./components/Backend/Login.vue";
 
 createApp(Login).mount('#login');
 
@@ -18,6 +19,8 @@ const admin = createApp(AdminPanel);
 
 app.use(router);
 admin.use(router_admin);
+
+app.use(vuex);
 admin.use(vuex);
 
 app.mount('#app');

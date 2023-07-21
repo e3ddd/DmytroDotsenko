@@ -43,12 +43,12 @@ export default {
 }
 
 .panel {
-    min-height: 100vh;
+    min-height: 100%;
     background-color: #d3d3d3;
 }
 
 .nav-bar {
-    min-height: 100vh;
+    height: 100vh;
 }
 
 

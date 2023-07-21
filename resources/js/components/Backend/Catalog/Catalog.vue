@@ -21,8 +21,6 @@
         </div>
         <div class="row">
             <PagePagination
-                v-if="this.total"
-                :total="this.total"
                 @update="this.onUpdate"
             />
         </div>
@@ -33,7 +31,8 @@
 import Images from "./components/Images.vue";
 import Content from "./components/Content.vue";
 import Loader from "../../UI/Loader.vue";
-import PagePagination from "../../Pagination.vue";
+import PagePagination from "../../UI/Pagination.vue";
+import {mapGetters} from "vuex";
 export default {
     components: {
         Loader,
@@ -43,7 +42,6 @@ export default {
     },
     data() {
         return {
-            total: 0,
             page: 1,
             loading: false,
         }
@@ -57,7 +55,7 @@ export default {
     },
 
     mounted() {
-        this.$store.dispatch('getPaintings')
+        this.$store.dispatch('getPaintings');
     }
 
 }

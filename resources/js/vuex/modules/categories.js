@@ -2,11 +2,16 @@ export default {
     state: {
         categories: [],
         parent_categories: [],
+        subcategories: [],
     },
 
     mutations: {
         setCategories(state, payload){
-            state.categories = payload;
+           state.categories = payload
+        },
+
+        setSubcategories(state, payload) {
+          state.subcategories = payload
         },
 
         setParentCategories(state, payload) {
@@ -27,6 +32,9 @@ export default {
             return state.parent_categories
         },
 
+        getSubcategories(state) {
+            return state.subcategories
+        }
     },
 
     actions: {
@@ -40,6 +48,14 @@ export default {
                 .then(response => context.commit('setCategories', response.data)
                 )
         },
+
+        getSubcategories(context, payload) {
+            axios.get('/api/get-subcategories', {
+                parent_id: payload
+            })
+                .then(response => context.commit('setSubcategories', {payload: response.data}))
+        }
+
     },
 
 }
