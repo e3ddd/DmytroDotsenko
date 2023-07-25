@@ -36,12 +36,12 @@ class PaintingRepository implements CheckNullableInterface
 
     public function getAllPaintings()
     {
-        return $this->painting->all();
+        return $this->painting->with('images')->get();
     }
 
     public function getAllPaintingsWithPagination()
     {
-        return $this->painting->with('images')->paginate(5);
+        return $this->painting->with('images')->paginate(1);
     }
 
     public function getLastPainting()
@@ -52,6 +52,13 @@ class PaintingRepository implements CheckNullableInterface
     public function getPaintingById($paintingId)
     {
         return $this->painting->with('images')->find($paintingId);
+    }
+
+    public function getPaintingBySlug($slug)
+    {
+        $this->checkNullable($slug);
+
+        return $this->painting->where('slug', $slug)->with('images')->get();
     }
 
     public function storePainting($painting)

@@ -8,16 +8,19 @@
         <div class="row">
             <div class="col p-2 list">
                 <div class="row">
-                    <div class="col-3 d-flex justify-content-center">
+                    <div class="col-2 d-flex justify-content-center">
                         <b>Назва категорії</b>
                     </div>
-                    <div class="col-3 d-flex justify-content-center">
+                    <div class="col-2 d-flex justify-content-center">
                         <b>Category name</b>
                     </div>
-                    <div class="col-3 d-flex justify-content-center">
+                    <div class="col-2 d-flex justify-content-center">
                         <b>Батьківська (Так або ID батьківської категорії)</b>
                     </div>
-                    <div class="col-3 d-flex justify-content-end">
+                    <div class="col-2 d-flex justify-content-center">
+                        <b>Слаг</b>
+                    </div>
+                    <div class="col-2 d-flex justify-content-end">
                        <span @click="this.show = true"><b>+ Додати категорію</b></span>
                     </div>
                 </div>
@@ -26,22 +29,22 @@
                 <loader/>
             </div>
             <div class="row categories pt-2" v-for="category in $store.getters.getAllCategories" v-if="$store.getters.getLoadingState === false">
-                <div class="col-3 d-flex justify-content-center align-items-center">
+                <div class="col-2 d-flex justify-content-center align-items-center">
                     {{category.name}}
                 </div>
-                <div class="col-3 d-flex justify-content-center align-items-center">
+                <div class="col-2 d-flex justify-content-center align-items-center">
                     {{category.name_en}}
                 </div>
-                <div class="col-3 d-flex justify-content-center align-items-center" v-if="category.parent_id == null">
+                <div class="col-2 d-flex justify-content-center align-items-center" v-if="category.parent_id == null">
                     Так
                 </div>
-
-                <div class="col-3 d-flex justify-content-center align-items-center" v-else>
+                <div class="col-2 d-flex justify-content-center align-items-center" v-else>
                     {{category.parent_id}}
                 </div>
-
-                <div class="col-1 d-flex justify-content-end">
-<!--                    <img src="../../../images/edit-btn.png" alt="edit" width="25"/>-->
+                <div class="col-2 d-flex justify-content-center align-items-center">
+                    {{category.slug}}
+                </div>
+                <div class="col-2 d-flex justify-content-end">
                     <img src="../../../images/delete-btn.png" :id="category.id" @click="deleteCategory" alt="delete" width="25"/>
                 </div>
             </div>

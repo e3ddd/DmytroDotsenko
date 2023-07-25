@@ -41,19 +41,25 @@ export default {
         getParentCategories(context) {
           axios.get('/api/get-parent-categories')
               .then(response => context.commit('setParentCategories', response.data))
+              .catch(err => console.log(err))
         },
 
         getCategories(context){
             axios.get('/api/get-all-categories')
-                .then(response => context.commit('setCategories', response.data)
-                )
+                .then(response => context.commit('setCategories', response.data))
+                .catch(err => console.log(err))
         },
 
         getSubcategories(context, payload) {
             axios.get('/api/get-subcategories', {
-                parent_id: payload
+                params: {
+                    parent_id: payload.parent_id
+                }
             })
-                .then(response => context.commit('setSubcategories', {payload: response.data}))
+                .then(response => {
+                    context.commit('setSubcategories', response.data)
+                })
+                .catch(err => console.log(err))
         }
 
     },

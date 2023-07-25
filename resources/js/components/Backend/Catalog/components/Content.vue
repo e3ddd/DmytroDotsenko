@@ -21,10 +21,18 @@
     </div>
     <div class="row">
         <div class="col-4">
+            Слаг
+        </div>
+        <div class="col">
+            {{painting.slug}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
             Назва
         </div>
         <div class="col">
-            {{painting.name}}
+            {{painting.name_ua}}
         </div>
         <div class="col">
 
@@ -48,10 +56,18 @@
     </div>
     <div class="row">
         <div class="col-4">
-            Опис
+            Матеріал
         </div>
         <div class="col">
-            {{painting.description}}
+            {{painting.material_ua}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            Техніка
+        </div>
+        <div class="col">
+            {{painting.style_ua}}
         </div>
     </div>
     <div class="row">
@@ -61,11 +77,12 @@
         <div class="col">
             <div class="row">
                 <div class="col">
-                    {{painting.width}}x{{painting.height}}x{{painting.long}}
+                    {{painting.height}}x{{painting.long}} см
                 </div>
             </div>
         </div>
     </div>
+
     <div class="row">
         <div class="col-4">
             Продана
@@ -75,6 +92,15 @@
         </div>
         <div class="col" v-if="painting.sold_status === 1">
             Так
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-4">
+            Опис
+        </div>
+        <div class="col">
+            {{painting.description_ua}}
         </div>
     </div>
 </template>

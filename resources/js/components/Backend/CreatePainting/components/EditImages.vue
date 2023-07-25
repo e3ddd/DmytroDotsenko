@@ -1,16 +1,18 @@
 <template>
     <div class="row">
-        <div class="col-4 p-3 d-flex justify-content-center align-items-center" v-for="image in images" :key="image.id">
+        <div class="col" v-for="image in images" :key="image.id">
             <div class="row">
                 <div class="col-11">
-                    <img :src="'/storage/images/' + image.painting_id + '_' + image.hash_id" alt="image" height="300">
+                        <background-image
+                            :path="'/storage/images/' + image.painting_id + '_' + image.hash_id"
+                        />
                 </div>
                 <div class="col p-0 cross" @click="this.$emit('deleteImage', image.id)">
                     X
                 </div>
             </div>
         </div>
-        <div class="col-4 upload-image d-flex justify-content-center align-items-center">
+        <div class="col d-flex justify-content-center align-items-center">
             <label for="upload-painting" style="font-size: 40px">
                 +
             </label>
@@ -21,7 +23,12 @@
 </template>
 
 <script>
+import BackgroundImage from "../../../UI/BackgroundImage.vue";
 export default {
+    components: {
+        BackgroundImage,
+    },
+
     props: {
         images: Array
     },
@@ -41,6 +48,17 @@ export default {
 </script>
 
 <style scoped>
+
+.photoBorder {
+    margin-top: 20px;
+    width: 500px;
+    height: 500px;
+
+    background-repeat     : no-repeat;
+    background-size       : contain;
+    background-position-x : 50%;
+    background-position-y : 50%;
+}
 
 #upload-painting {
     opacity: 0;
@@ -66,8 +84,8 @@ label:hover {
     transition: 0.2s;
 }
 
-.upload-image {
-    padding-top: 200px;
-    padding-bottom: 200px;
+.upload-btn {
+    padding: 100px;
 }
+
 </style>

@@ -187,6 +187,12 @@ return [
          */
 
         /*
+         * ShareServiceProvider
+         */
+        Jorenvh\Share\Providers\ShareServiceProvider::class,
+
+
+        /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
@@ -209,6 +215,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
+        'Share' => Jorenvh\Share\ShareFacade::class,
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 

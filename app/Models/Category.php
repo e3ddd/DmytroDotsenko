@@ -15,6 +15,7 @@ class Category extends Model
         'name',
         'name_en',
         'parent_id',
+        'slug',
     ];
 
     public function paintings()

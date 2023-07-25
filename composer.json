@@ -7,11 +7,12 @@
     "require": {
         "php": "^8.0.2",
         "ext-http": "*",
+        "ext-imagick": "*",
         "guzzlehttp/guzzle": "^7.2",
+        "jorenvanhocht/laravel-share": "^4.2",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
-        "laravel/tinker": "^2.7",
-        "ext-imagick": "*"
+        "laravel/tinker": "^2.7"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

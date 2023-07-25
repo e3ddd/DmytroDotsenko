@@ -19,6 +19,10 @@
         </div>
     </div>
     <div class="row mb-2 p-0">
+        <label for="">Слаг</label>
+        <input type="text" placeholder="example-slug" v-model="painting.slug">
+    </div>
+    <div class="row mb-2 p-0">
     <div class="col p-0">
             <div class="row">
                 <div class="col-9">
@@ -31,8 +35,8 @@
                 </div>
             </div>
         </div>
-        <input type="text" name="name" v-model="painting.name" v-if="this.lang.name.active === 'name_ua'">
-        <input type="text" name="name" v-model="painting.name_en" v-if="this.lang.name.active === 'name_en'">
+        <input type="text" name="name" v-model="painting.name_ua" placeholder="Українська" v-if="this.lang.name.active === 'name_ua'">
+        <input type="text" name="name" v-model="painting.name_en" placeholder="English" v-if="this.lang.name.active === 'name_en'">
     </div>
     <div class="row mb-2 p-0">
         <label for="">Ціна</label>
@@ -51,17 +55,44 @@
                 </div>
             </div>
         </div>
-        <textarea rows="4" cols="50" name="description" v-model="painting.description" v-if="this.lang.desc.active === 'desc_ua'"/>
-        <textarea rows="4" cols="50" name="description" v-model="painting.description_en" v-if="this.lang.desc.active === 'desc_en'"/>
+        <textarea rows="4" cols="50" name="description" placeholder="Українська" v-model="painting.description_ua" v-if="this.lang.desc.active === 'desc_ua'"/>
+        <textarea rows="4" cols="50" name="description" placeholder="English" v-model="painting.description_en" v-if="this.lang.desc.active === 'desc_en'"/>
     </div>
     <div class="row mb-2 p-0">
         <label for="">Рік</label>
         <input type="text" v-model="painting.year">
     </div>
-
     <div class="row mb-2 p-0">
-        <label for="">Ширина</label>
-        <input type="text" v-model="painting.width">
+        <div class="col p-0">
+            <div class="row">
+                <div class="col-9">
+                    <label for="">Матеріал</label>
+                </div>
+                <div class="col languages">
+                    <span @click="language" id="material_ua" :class="this.lang.material._ua">Українська</span>
+                    /
+                    <span @click="language" id="material_en" :class="this.lang.material._en">English</span>
+                </div>
+            </div>
+        </div>
+        <input name="material" v-model="painting.material_ua" placeholder="Українська" v-if="this.lang.material.active === 'material_ua'"/>
+        <input name="material" v-model="painting.material_en" placeholder="English" v-if="this.lang.material.active === 'material_en'"/>
+    </div>
+    <div class="row mb-2 p-0">
+        <div class="col p-0">
+            <div class="row">
+                <div class="col-9">
+                    <label for="">Техніка</label>
+                </div>
+                <div class="col languages">
+                    <span @click="language" id="style_ua" :class="this.lang.style._ua">Українська</span>
+                    /
+                    <span @click="language" id="style_en" :class="this.lang.style._en">English</span>
+                </div>
+            </div>
+        </div>
+        <input name="material" v-model="painting.style_ua" placeholder="Українська" v-if="this.lang.style.active === 'style_ua'"/>
+        <input name="material" v-model="painting.style_en" placeholder="English" v-if="this.lang.style.active === 'style_en'"/>
     </div>
     <div class="row mb-2 p-0">
         <label for="">Висота</label>
@@ -107,6 +138,16 @@ export default {
                     _ua: 'choose',
                     _en: '',
                     active: 'name_ua',
+                },
+                material: {
+                    _ua: 'choose',
+                    _en: '',
+                    active: 'material_ua',
+                },
+                style: {
+                    _ua: 'choose',
+                    _en: '',
+                    active: 'style_ua',
                 },
             },
         }

@@ -1,10 +1,11 @@
 <?php
 
 use App\Http\Controllers\Auth\CategoriesController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\PaintingController;
 use App\Http\Controllers\Auth\PaintingImagesController;
+use App\Http\Controllers\Auth\ShareLinksController;
 use App\Http\Controllers\Auth\ShowController;
-use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,7 +20,6 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/test', [\App\Http\Controllers\TestController::class, 'test']);
 
-Route::get('/admin/login', [ShowController::class, 'showLoginArminForm']);
 Route::get('/admin/login/log', [LoginController::class, 'login']);
 
 Route::prefix('api')
@@ -33,7 +33,9 @@ Route::prefix('api')
         Route::get('/get-painting-by-id', [PaintingController::class, 'getPaintingById']);
         Route::post('/update-painting', [PaintingController::class, 'updatePainting']);
         Route::get('/get-last-painting', [PaintingController::class, 'getLastPainting']);
-        Route::get('/get-all-painting-with-pagination', [PaintingController::class, 'getAllPaintingsWithPagination']);
+        Route::get('/get-all-paintings', [PaintingController::class, 'getAllPaintings']);
+        Route::get('/get-all-paintings-with-pagination', [PaintingController::class, 'getAllPaintingsWithPagination']);
+        Route::get('/get-painting-by-slug', [PaintingController::class, 'getPaintingBySlug']);
         Route::post('/create-painting', [PaintingController::class, 'storePainting']);
         Route::post('/delete-painting', [PaintingController::class, 'destroyPainting']);
         Route::post('/delete-painting-image', [PaintingImagesController::class, 'deleteImage']);
@@ -41,11 +43,6 @@ Route::prefix('api')
     });
 
 
-Route::prefix('admin')->middleware('administration')
-    ->group(function() {
-        Route::get('/', [ShowController::class, 'showAdmin']);
-        Route::get("{any?}", \App\Http\Controllers\Auth\BackendController::class)->where('any', '.*');
-    });
 
 Route::group([], function() {
     Route::get('/', [ShowController::class, 'showApp']);

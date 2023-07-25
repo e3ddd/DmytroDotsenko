@@ -15,15 +15,15 @@ return new class extends Migration
     {
         Schema::create('paintings', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name_ua');
             $table->integer('price');
-            $table->text('description');
+            $table->text('description_ua');
             $table->integer('width');
             $table->integer('height');
             $table->integer('long');
             $table->boolean('sold_status');
             $table->integer('category_id');
-            $table->index(['name']);
+            $table->index(['name_ua']);
             $table->timestamps();
         });
     }

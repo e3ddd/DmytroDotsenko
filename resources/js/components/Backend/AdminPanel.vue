@@ -29,7 +29,6 @@ export default {
 <style scoped>
 
 .page {
-    height: 100%;
 }
 
 .head span {

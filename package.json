@@ -14,9 +14,12 @@
     "dependencies": {
         "@vitejs/plugin-vue": "^4.2.3",
         "bootstrap": "^5.3.0",
+        "require": "^2.4.20",
         "vue": "^3.3.4",
         "vue-router": "^4.2.4",
+        "vue-social-sharing": "^4.0.0-alpha4",
         "vue3-carousel": "^0.3.1",
+        "vuefire": "^3.1.11",
         "vuex": "^4.0.2"
     }
 }

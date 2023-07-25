@@ -51,13 +51,17 @@ export default {
     data() {
       return {
           painting: {
-              name: '',
+              slug: '',
+              name_ua: '',
               name_en: '',
               price: 0,
-              description: '',
+              description_ua: '',
               description_en: '',
               year: '',
-              width: 0,
+              material_ua: '',
+              material_en: '',
+              style_ua: '',
+              style_en: '',
               height: 0,
               long: 0,
               sold_status: '',
@@ -83,13 +87,17 @@ export default {
             if(this.images.length !== 0){
                 let fd = new FormData()
                 this.images[0].map((item, key) => fd.append('images[' + key + ']', item.file, item.file.name));
-                fd.append('painting[name]', this.painting.name)
+                fd.append('painting[slug]', this.painting.slug)
+                fd.append('painting[name_ua]', this.painting.name_ua)
                 fd.append('painting[name_en]', this.painting.name_en)
                 fd.append('painting[price]', this.painting.price)
-                fd.append('painting[description]', this.painting.description)
+                fd.append('painting[description_ua]', this.painting.description_ua)
                 fd.append('painting[description_en]', this.painting.description_en)
                 fd.append('painting[year]', this.painting.year)
-                fd.append('painting[width]', this.painting.width)
+                fd.append('painting[material_ua]', this.painting.material_ua)
+                fd.append('painting[material_en]', this.painting.material_en)
+                fd.append('painting[style_ua]', this.painting.style_ua)
+                fd.append('painting[style_en]', this.painting.style_en)
                 fd.append('painting[height]', this.painting.height)
                 fd.append('painting[long]', this.painting.long)
                 fd.append('painting[category_id]', this.painting.category_id)
@@ -119,7 +127,8 @@ export default {
                         this.description = ''
                         this.description_en = ''
                         this.year = ''
-                        this.width = ''
+                        this.material = ''
+                        this.style = ''
                         this.height = ''
                         this.long = ''
 

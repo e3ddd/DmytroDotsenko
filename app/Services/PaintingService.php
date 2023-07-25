@@ -33,6 +33,11 @@ class PaintingService
         return $this->paintingRepository->getPaintingById($paintingId);
     }
 
+    public function getPaintingBySlug($slug)
+    {
+        return $this->paintingRepository->getPaintingBySlug($slug);
+    }
+
     public function storePainting($painting)
     {
         return $this->paintingRepository->storePainting($painting);

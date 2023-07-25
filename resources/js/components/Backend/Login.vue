@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container d-flex justify-content-center">
         <div class="row">
             <div class="col form">
                     <div class="row header">
@@ -122,6 +122,8 @@ export default {
 }
 
 .inputs {
+    margin-left: 20px;
+    margin-right: 20px;
     margin-top: 10px;
     text-align: center;
 }

@@ -9,6 +9,7 @@
 <body>
 <div id="app"></div>
 @vite('resources/js/app.js')
+<script src="/dist/vue-social-sharing.js"></script>
 <script src="https://unpkg.com/vue@3"></script>
 <script src="https://unpkg.com/vue-router@4"></script>
 </body>

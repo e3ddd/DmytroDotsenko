@@ -12,16 +12,20 @@ class Painting extends Model
     protected $table = 'paintings';
 
     protected $fillable = [
-        'name',
+        'name_ua',
         'name_en',
         'price',
-        'description',
+        'description_ua',
         'description_en',
         'year',
-        'width',
+        'material_ua',
+        'material_en',
+        'style_ua',
+        'style_en',
         'height',
         'long',
         'sold_status',
+        'slug',
         'category_id'
     ];
 

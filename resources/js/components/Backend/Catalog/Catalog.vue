@@ -6,12 +6,12 @@
             </div>
             <div class="col">
                 <div class="row" v-for="painting in $store.getters.getAllPaintings">
-                    <div class="col-5 pt-4 images">
+                    <div class="col pt-4 images">
                         <images
                             :images="painting.images"
                         />
                     </div>
-                    <div class="col-7 pt-4">
+                    <div class="col pt-4">
                         <content
                             :painting="painting"
                         />
@@ -63,7 +63,6 @@ export default {
 
 <style scoped>
 .images {
-    position: relative;
     z-index: 99;
 }
 

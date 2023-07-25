@@ -9,11 +9,13 @@ use App\Models\User;
 use App\Repositories\PaintingRepository;
 use App\Services\PaintingService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Jorenvh\Share\Share;
 
 class TestController extends Controller
 {
     public function test()
     {
-
+        dd(App::getLocale());
     }
 }

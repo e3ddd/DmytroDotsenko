@@ -1,33 +1,62 @@
 <template>
-    <div class="container-fluid">
-            <div class="row" v-if="this.active">
-                <div class="col p-5 mt-4 nav-menu" :class="this.animate">
-                    <div class="row" v-for="category in this.$store.getters.getAllCategories">
-                       <div class="col-2 pb-3">
-                           <div class="row">
-                               <div class="col">
-                                   <div class="row category" :id="category.id" @click="showSubcategories"  v-if="category.parent_id == null">
-                                       {{category.name}}
-                                   </div>
-                                   <div class="row" v-for="subcategory in $store.getters.getSubcategories">
-                                        {{subcategory}}
-<!--                                       <router-link :to="'/' + subcategory[category.id].name">{{category.name}}</router-link>-->
-                                   </div>
-                               </div>
-                           </div>
-                       </div>
+    <div class="container-fluid header">
+        <div class="row nav-menu-row" v-if="this.active">
+            <div class="col p-5 nav-menu" :class="this.animate">
+                <div class="row" v-for="category in this.$store.getters.getAllCategories">
+                    <div class="col-2 pb-3">
+                        <div class="row">
+                            <div class="col ">
+                                <div class="row category" :id="category.id" @click="showSubcategories"  v-if="category.parent_id == null">
+                                    {{category.name}}
+                                </div>
+                                <div class="row subcategories" v-for="subcategory in $store.getters.getSubcategories" v-if="this.show_sub == category.id">
+                                    <router-link :to="'/' + subcategory.slug">{{subcategory.name}}</router-link>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col p-0">
+                        <router-link to="/" style="
+                                               font-size: 30px;
+                                               font-weight: lighter;
+                            ">
+                            Home
+                        </router-link>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-1 p-0 inst">
+                        <a href="https://www.instagram.com/dsdotsen/" style="
+                                               font-size: 30px;
+                                               font-weight: lighter;
+                            "
+                           target="_blank"
+                        >
+                            <img src="../../../images/instagram.svg" width="50" height="50"/>
+                        </a>
+                    </div>
+                    <div class="col p-0 language">
+                        <div class="row">
+                            <div class="col">
+                                <span @click="changeLang" id="EN" :class="this.current_language.EN">EN</span>
+                                |
+                                <span @click="changeLang" id="UA" :class="this.current_language.UA">UA</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
         <div class="row">
-            <div class="col p-5 label">
-                <span class="display-5">dsdotsen</span>
+            <div class="col-7 p-5 label">
+                <span class="display-5" ref="observe">dsdotsen</span>
             </div>
-            <div class="col-8"></div>
-            <div class="col burger">
-                    <burger-button
-                        @open="openMenu"
-                    />
+            <div class="col burger m-0 p-0">
+                <burger-button
+                    @open="openMenu"
+                />
             </div>
         </div>
     </div>
@@ -42,19 +71,31 @@ export default {
 
     data() {
         return {
+            current_language: {
+                EN: '',
+                UA: 'current_language',
+            },
+
             active: false,
             animate: '',
             show_sub: false,
         }
     },
 
+
     methods: {
         showSubcategories(e){
-            if(!this.show_sub){
-                this.$store.dispatch('getSubcategories', e.target.id)
-                this.show_sub = true
+            this.$store.dispatch('getSubcategories', {
+                    parent_id: e.target.id
+                })
+
+
+            if(this.show_sub != 0){
+                this.show_sub = 0
+                return;
             }
-            this.show_sub = !this.show_sub
+
+            this.show_sub = e.target.id
         },
 
         openMenu(active) {
@@ -67,16 +108,47 @@ export default {
                 this.active = active
 
             }, 100)
+        },
+
+        changeLang(e) {
+            let lang = e.target.id
+
+            for (const key in this.current_language) {
+                if(this.current_language[key] === 'current_language'){
+                    this.current_language[key] = ''
+                }
+            }
+
+
+            this.current_language[lang] = 'current_language'
+
+
+            this.$store.commit('setLanguage', lang.toLowerCase())
         }
+
     },
 
 }
 </script>
 
 <style scoped>
+
+.language {
+    margin-top: 30px;
+    opacity: 0.6;
+    font-size: 32px;
+}
+
+.current_language {
+    transition: 0.2s;
+    color: orange;
+}
+
 .nav-menu {
+    position: fixed;
+    padding: 0;
+    margin-top: 30px;
     background: #ffffff;
-    position: absolute;
     top: 0;
     left: 0;
 }
@@ -88,21 +160,23 @@ export default {
 
 .hide {
     animation-name: hide-nav;
-    animation-duration: 0.1s;
+    animation-duration: 0.5s;
 }
 
-tr {
-    padding-bottom: 20px;
-}
-
-
-
- .category {
-     cursor: pointer;
+.category {
+    cursor: pointer;
     font-weight: lighter;
     font-size: 34px;
     padding: 50px 0px 0px 0px !important;
+}
+
+.subcategories {
     z-index: 999;
+}
+
+.subcategories a {
+    font-size: 24px;
+    font-weight: lighter;
 }
 
 .burger {
@@ -114,6 +188,12 @@ a {
     color: black;
 }
 
+.inst {
+    opacity: 0.5;
+    padding: 0px;
+    margin-top: 30px;
+}
+
 @keyframes show-nav {
     0% {opacity: 0}
     100% {opacity: 1}
@@ -123,7 +203,4 @@ a {
     0% {opacity: 1}
     100% {opacity: 0}
 }
-
-
-
 </style>
