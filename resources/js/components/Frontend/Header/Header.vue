@@ -1,62 +1,45 @@
 <template>
-    <div class="container-fluid header">
-        <div class="row nav-menu-row" v-if="this.active">
-            <div class="col p-5 nav-menu" :class="this.animate">
-                <div class="row" v-for="category in this.$store.getters.getAllCategories">
-                    <div class="col-2 pb-3">
-                        <div class="row">
-                            <div class="col ">
-                                <div class="row category" :id="category.id" @click="showSubcategories"  v-if="category.parent_id == null">
-                                    {{category.name}}
-                                </div>
-                                <div class="row subcategories" v-for="subcategory in $store.getters.getSubcategories" v-if="this.show_sub == category.id">
-                                    <router-link :to="'/' + subcategory.slug">{{subcategory.name}}</router-link>
-                                </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col p-5 label">
+                <span class="display-5" ref="observe">
+                    <router-link to="/">dsdotsen</router-link>
+                </span>
+            </div>
+            <div class="col d-flex justify-content-center align-items-center">
+                <div class="row">
+                    <div class="col" v-for="category in $store.getters.getAllCategories">
+                        <div class="row mt-1" style="cursor: pointer;" @mouseenter="showSubcategories" :id="category.id"  v-if="category.parent_id == null">
+                            {{category['name_' + $store.getters.getLanguage]}}
+                        </div>
+                        <div class="row d-flex justify-content-center align-items-center subcategories" v-for="subcategory in $store.getters.getSubcategories" v-if="this.show_sub == category.id">
+                            <div class="col link">
+                                <router-link :to="'/' + category.name_en.toLowerCase() + '/' + subcategory.slug" :id="subcategory.slug" @click="setPaintingsByCategory">{{subcategory['name_' + $store.getters.getLanguage]}}</router-link>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row mt-5">
-                    <div class="col p-0">
-                        <router-link to="/" style="
-                                               font-size: 30px;
-                                               font-weight: lighter;
-                            ">
-                            Home
-                        </router-link>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-1 p-0 inst">
-                        <a href="https://www.instagram.com/dsdotsen/" style="
+            </div>
+            <div class="col-2 d-flex justify-content-end align-items-center">
+                <div class="col-3">
+                    <a href="https://www.instagram.com/dsdotsen/" style="
                                                font-size: 30px;
                                                font-weight: lighter;
                             "
-                           target="_blank"
-                        >
-                            <img src="../../../images/instagram.svg" width="50" height="50"/>
-                        </a>
-                    </div>
-                    <div class="col p-0 language">
-                        <div class="row">
-                            <div class="col">
-                                <span @click="changeLang" id="EN" :class="this.current_language.EN">EN</span>
-                                |
-                                <span @click="changeLang" id="UA" :class="this.current_language.UA">UA</span>
-                            </div>
+                       target="_blank"
+                    >
+                        <img src="../../../images/instagram.svg" width="30" height="30"/>
+                    </a>
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <div class="col language">
+                            <span @click="changeLang" id="EN" :class="this.current_language.EN">EN</span>
+                            |
+                            <span @click="changeLang" id="UA" :class="this.current_language.UA">UA</span>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-7 p-5 label">
-                <span class="display-5" ref="observe">dsdotsen</span>
-            </div>
-            <div class="col burger m-0 p-0">
-                <burger-button
-                    @open="openMenu"
-                />
             </div>
         </div>
     </div>
@@ -76,8 +59,13 @@ export default {
                 UA: 'current_language',
             },
 
-            active: false,
-            animate: '',
+            trans: {
+                home: {
+                    en: 'Home',
+                    ua: 'Домівка',
+                }
+            },
+
             show_sub: false,
         }
     },
@@ -86,8 +74,8 @@ export default {
     methods: {
         showSubcategories(e){
             this.$store.dispatch('getSubcategories', {
-                    parent_id: e.target.id
-                })
+                parent_id: e.target.id
+            })
 
 
             if(this.show_sub != 0){
@@ -98,16 +86,8 @@ export default {
             this.show_sub = e.target.id
         },
 
-        openMenu(active) {
-            if(active){
-                this.animate = 'show';
-            }else{
-                this.animate = 'hide'
-            }
-            setTimeout(() => {
-                this.active = active
-
-            }, 100)
+        setPaintingsByCategory(e){
+            this.$store.dispatch('getPaintingByCategorySlug', e.target.id);
         },
 
         changeLang(e) {
@@ -132,11 +112,14 @@ export default {
 </script>
 
 <style scoped>
+a {
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+}
 
-.language {
-    margin-top: 30px;
-    opacity: 0.6;
-    font-size: 32px;
+.subcategories {
+
 }
 
 .current_language {
@@ -144,63 +127,9 @@ export default {
     color: orange;
 }
 
-.nav-menu {
-    position: fixed;
-    padding: 0;
-    margin-top: 30px;
-    background: #ffffff;
-    top: 0;
-    left: 0;
-}
-
-.show {
-    animation-name: show-nav;
-    animation-duration: 0.5s;
-}
-
-.hide {
-    animation-name: hide-nav;
-    animation-duration: 0.5s;
-}
-
-.category {
+.language {
     cursor: pointer;
-    font-weight: lighter;
-    font-size: 34px;
-    padding: 50px 0px 0px 0px !important;
+    font-size: 18px;
 }
 
-.subcategories {
-    z-index: 999;
-}
-
-.subcategories a {
-    font-size: 24px;
-    font-weight: lighter;
-}
-
-.burger {
-    position: fixed;
-}
-
-a {
-    text-decoration: none;
-    color: black;
-}
-
-.inst {
-    opacity: 0.5;
-    padding: 0px;
-    margin-top: 30px;
-}
-
-@keyframes show-nav {
-    0% {opacity: 0}
-    100% {opacity: 1}
-}
-
-@keyframes hide-nav {
-    0% {opacity: 1}
-    100% {opacity: 0}
-}
 </style>

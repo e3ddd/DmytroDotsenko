@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('paintings', function (Blueprint $table) {
             $table->id();
             $table->string('name_ua');
-            $table->integer('price');
+            $table->integer('price')->nullable();
             $table->text('description_ua');
             $table->integer('width');
             $table->integer('height');

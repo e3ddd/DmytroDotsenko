@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Http\CheckNullableInterface;
 use App\Http\CheckNullableParams;
+use App\Models\Category;
 use App\Models\Painting;
 use App\Models\PaintingImage;
 use Illuminate\Support\Facades\Storage;
@@ -17,13 +18,20 @@ class PaintingRepository implements CheckNullableInterface
         $this->painting = new Painting();
     }
 
-    public function checkNullable(mixed $value)
+    public function checkNullable(mixed $value, mixed $exceptions = null)
     {
         $check = CheckNullableParams::checkNullable($value);
 
         if(is_array($value)){
             if($check){
                 foreach ($check as $key => $item){
+                    if($exceptions !== null){
+                        foreach ($exceptions as $exception){
+                            if($exception == $key){
+                                return;
+                            }
+                        }
+                    }
                     throw new RuntimeException($key . ' is required ! Now is null');
                 }
             }
@@ -61,9 +69,19 @@ class PaintingRepository implements CheckNullableInterface
         return $this->painting->where('slug', $slug)->with('images')->get();
     }
 
+    public function getPaintingByCategory($category_slug)
+    {
+        $this->checkNullable($category_slug);
+
+        $category_id = Category::where('slug', $category_slug)->first()->id ?? null;
+
+        return $this->painting->where('category_id', $category_id)->with('images')->get();
+
+    }
+
     public function storePainting($painting)
     {
-        $this->checkNullable($painting);
+        $this->checkNullable($painting, ['price']);
 
         $this->painting->create($painting);
 
@@ -72,7 +90,7 @@ class PaintingRepository implements CheckNullableInterface
 
     public function updatePainting($painting_id, $painting)
     {
-        $this->checkNullable($painting);
+        $this->checkNullable($painting, ['price']);
 
         Painting::find($painting_id)->update($painting);
     }

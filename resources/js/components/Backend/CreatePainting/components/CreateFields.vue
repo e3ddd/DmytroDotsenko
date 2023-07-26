@@ -11,7 +11,7 @@
                     <select name="categories" v-model="painting.category_id">
                         <option disabled selected>Обрати категорію...</option>
                         <option :value="category.id" v-for="category in $store.getters.getAllCategories">
-                            {{category.name}}
+                            {{category.name_ua}}
                         </option>
                     </select>
                 </div>

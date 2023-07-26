@@ -38,6 +38,11 @@ class PaintingService
         return $this->paintingRepository->getPaintingBySlug($slug);
     }
 
+    public function getPaintingByCategory($category_slug)
+    {
+        return $this->paintingRepository->getPaintingByCategory($category_slug);
+    }
+
     public function storePainting($painting)
     {
         return $this->paintingRepository->storePainting($painting);

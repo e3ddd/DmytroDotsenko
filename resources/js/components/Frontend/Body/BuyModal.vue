@@ -40,7 +40,15 @@ export default {
 
     methods: {
       async send() {
-          axios.post()
+          axios.post('/api/send-message', {
+              email: this.email,
+              painting: this.$store.getters.getCurrentPainting,
+              lang: this.$store.getters.getLanguage,
+          })
+              .then(response => {
+                  console.log(response)
+              })
+              .catch(err => console.log(err))
       }
     },
 }

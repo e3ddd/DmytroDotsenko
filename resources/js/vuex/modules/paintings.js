@@ -14,6 +14,10 @@ export default {
             return state.total;
         },
 
+        getPaintingByCategorySlug(state){
+          return state.paintings
+        },
+
         getCurrentPainting(state) {
             return state.current_painting;
         }
@@ -59,6 +63,18 @@ export default {
             })
                 .then(response => {
                     context.commit('setCurrentPainting', response.data[0])
+                })
+                .catch(err => console.log(err))
+        },
+
+        getPaintingByCategorySlug(context, payload) {
+            axios.get('/api/get-painting-by-category-slug', {
+                params: {
+                    category_slug: payload
+                }
+            })
+                .then((response) => {
+                    context.commit('setPaintings', response.data)
                 })
                 .catch(err => console.log(err))
         }

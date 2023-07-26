@@ -24,7 +24,7 @@
                 <h1>{{ $store.getters.getCurrentPainting['name_' + $store.getters.getLanguage] }}</h1>
             </div>
         </div>
-        <div class="row mt-5 mb-5 price">
+        <div class="row mt-5 mb-5 price" v-if="$store.getters.getCurrentPainting.price !== null">
             {{ $store.getters.getCurrentPainting.price }} y.o.
         </div>
 
@@ -44,7 +44,7 @@
                 {{ $store.getters.getCurrentPainting['style_' + $store.getters.getLanguage] }}, {{ $store.getters.getCurrentPainting['material_' + $store.getters.getLanguage] }}
             </div>
         </div>
-        <div class="row mt-5">
+        <div class="row mt-5" v-if="$store.getters.getCurrentPainting.price !== null">
             <div class="col buy-btn d-flex justify-content-center">
                 <button @click="this.show = true" >{{this.buy_btn[$store.getters.getLanguage]}}</button>
             </div>
@@ -99,8 +99,9 @@ export default {
 </script>
 
 <style scoped>
+
+
 .about {
-    padding-top: 50px !important;
     padding-bottom: 50px !important;
     font-size: 36px;
     background: #eaeaea;

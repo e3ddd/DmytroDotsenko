@@ -30,7 +30,7 @@
             </div>
             <div class="row categories pt-2" v-for="category in $store.getters.getAllCategories" v-if="$store.getters.getLoadingState === false">
                 <div class="col-2 d-flex justify-content-center align-items-center">
-                    {{category.name}}
+                    {{category.name_ua}}
                 </div>
                 <div class="col-2 d-flex justify-content-center align-items-center">
                     {{category.name_en}}

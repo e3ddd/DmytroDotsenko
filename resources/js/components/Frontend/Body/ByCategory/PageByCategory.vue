@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid">
+    <div class="container-fluid painting">
         <div class="row" v-for="painting in $store.getters.getAllPaintings">
             <div class="col p-0 paintings">
                 <router-link :to="'/' + painting.slug">
@@ -29,23 +29,29 @@
 
 <script>
 export default {
-    components: {
-
-    },
     mounted() {
-        this.$store.dispatch('getAllPaintings');
+        this.$store.dispatch('getPaintingByCategorySlug', this.$route.params.subcategory_slug);
+
     }
 }
 </script>
 
 <style scoped>
+.painting {
+    opacity: 0;
+    animation: ani 1s forwards;
+}
+
+@keyframes ani {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
 .image img {
     padding: 0;
 }
 
 .paintings {
-    opacity: 0;
-    animation: ani 1s forwards;
     margin-bottom: 150px !important;
 }
 
@@ -60,10 +66,4 @@ export default {
 .parameters, .year{
     padding: 10px 0px 0px 50px;
 }
-
-@keyframes ani {
-    0% {opacity: 0;}
-    100% {opacity: 1;}
-}
-
 </style>

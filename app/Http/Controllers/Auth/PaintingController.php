@@ -41,6 +41,11 @@ class PaintingController extends Controller
         return $this->paintingService->getPaintingBySlug($request->slug);
     }
 
+    public function getPaintingsByCategory(Request $request)
+    {
+        return $this->paintingService->getPaintingByCategory($request->category_slug);
+    }
+
     public function storePainting(StorePaintingRequest $request)
     {
         $paintingId = $this->paintingService->storePainting($request->painting);

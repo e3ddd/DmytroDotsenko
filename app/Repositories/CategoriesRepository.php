@@ -14,13 +14,18 @@ class CategoriesRepository implements CheckNullableInterface
         $this->category = new Category();
     }
 
-    public function checkNullable(mixed $value)
+    public function checkNullable(mixed $value, mixed $exceptions = null)
     {
         $check = CheckNullableParams::checkNullable($value);
 
         if(is_array($value)){
             if($check){
                 foreach ($check as $key => $item){
+                    foreach ($exceptions as $exception){
+                        if($exception == $key){
+                            return;
+                        }
+                    }
                     throw new RuntimeException($key . ' is required ! Now is null');
                 }
             }

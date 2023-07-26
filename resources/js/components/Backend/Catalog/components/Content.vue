@@ -1,7 +1,7 @@
 <template>
     <delete-painting-modal
         :painting_id="painting.id"
-        :name="painting.name"
+        :name="painting.name_ua"
         v-if="this.show"
         @show="showModal"
     />

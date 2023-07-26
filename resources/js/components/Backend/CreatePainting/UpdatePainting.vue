@@ -195,6 +195,7 @@ export default {
                     }, 5000)
                 })
                 .catch(err => {
+                    console.log(err)
                     this.alert_message.content = err.response.data.message
                     this.alert_message.type = 'error'
                     setTimeout(() => {

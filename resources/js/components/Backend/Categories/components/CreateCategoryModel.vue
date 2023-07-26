@@ -12,7 +12,7 @@
                 </div>
             </div>
             <div class="row">
-                <input type="text" name="name" placeholder="Українська" v-model="this.category.name" v-if="this.lang.name.active === 'name_ua'">
+                <input type="text" name="name" placeholder="Українська" v-model="this.category.name_ua" v-if="this.lang.name.active === 'name_ua'">
                 <input type="text" name="name" placeholder="English" v-model="this.category.name_en" v-if="this.lang.name.active === 'name_en'">
             </div>
             <div class="row pt-2 mb-2 p-0">
@@ -64,7 +64,7 @@ export default {
             },
 
             category: {
-                name: '',
+                name_ua: '',
                 name_en: '',
                 parent_id: '',
                 slug: '',

@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\CategoriesController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\PaintingController;
 use App\Http\Controllers\Auth\PaintingImagesController;
+use App\Http\Controllers\Auth\SendMessageController;
 use App\Http\Controllers\Auth\ShareLinksController;
 use App\Http\Controllers\Auth\ShowController;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,7 @@ Route::prefix('api')
         Route::post('/delete-category', [CategoriesController::class, 'deleteCategory']);
         Route::post('/update-category', [CategoriesController::class, 'updateCategory']);
         Route::get('/get-painting-by-id', [PaintingController::class, 'getPaintingById']);
+        Route::get('/get-painting-by-category-slug', [PaintingController::class, 'getPaintingsByCategory']);
         Route::post('/update-painting', [PaintingController::class, 'updatePainting']);
         Route::get('/get-last-painting', [PaintingController::class, 'getLastPainting']);
         Route::get('/get-all-paintings', [PaintingController::class, 'getAllPaintings']);
@@ -40,6 +42,7 @@ Route::prefix('api')
         Route::post('/delete-painting', [PaintingController::class, 'destroyPainting']);
         Route::post('/delete-painting-image', [PaintingImagesController::class, 'deleteImage']);
         Route::post('/store-painting-image', [PaintingImagesController::class, 'storeImage']);
+        Route::post('/send-message', [SendMessageController::class, 'send']);
     });
 
 
