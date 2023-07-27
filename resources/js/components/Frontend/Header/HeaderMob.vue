@@ -3,7 +3,7 @@
         <div class="row nav-menu-row" v-if="this.active">
             <div class="col p-5 nav-menu" :class="this.animate">
                 <div class="row" v-for="category in this.$store.getters.getAllCategories">
-                    <div class="col-2 pb-3">
+                    <div class="col-2">
                         <div class="row">
                             <div class="col ">
                                 <div class="row category" :id="category.id" @click="showSubcategories"  v-if="category.parent_id == null">

@@ -36,7 +36,7 @@
                         <select name="categories" id="" v-model="this.category.parent_id">
                             <option disabled selected>Батьківська категорія...</option>
                             <option :value="category.id" v-for="category in $store.getters.getParentCategories">
-                                {{category.name}}
+                                {{category.name_ua}}
                             </option>
                         </select>
                     </div>
