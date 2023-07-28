@@ -13,6 +13,8 @@ class PaintingImage extends Model
 
     protected $fillable = [
         'painting_id',
-        'hash_id'
+        'hash_id',
+        'width',
+        'height'
     ];
 }

@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 
 class PaintingImagesController extends Controller
 {
-
     public function __construct()
     {
         $this->paintingImagesService = app(PaintingImagesService::class);

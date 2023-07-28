@@ -28,8 +28,7 @@ class PaintingImagesService
     public function storeImages($paintingId, $image)
     {
             $storeName = $paintingId . '_' . $image->hashName();
-            $this->paintingImagesRepository->storeImages($paintingId,  $image->hashName());
-            $this->paintingImagesRepository->saveImages($storeName, $image);
+            $this->paintingImagesRepository->saveImages($paintingId,  $image->hashName(), $storeName, $image);
     }
 
     public function deleteImage($image_id)

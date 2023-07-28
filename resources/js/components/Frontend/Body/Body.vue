@@ -1,9 +1,9 @@
 <template>
         <Body_Desc
-            v-if="this.width > 981"
+           class="desctop"
         />
         <Body_Mob
-            v-if="this.width <= 981"
+            class="mobile"
         />
 </template>
 

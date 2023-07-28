@@ -17,7 +17,7 @@ class ImageProcess
         ];
         $imagickDst = new Imagick();
         $imagickDst->setCompression((int)$compressionList);
-        $imagickDst->setCompressionQuality(80);
+        $imagickDst->setCompressionQuality(60);
         $imagickDst->newPseudoImage(
             $imagickSrc->getImageWidth(),
             $imagickSrc->getImageHeight(),
@@ -32,6 +32,8 @@ class ImageProcess
         );
         $imagickDst->setImageFormat("jpg");
 //        $imagickSrc->resizeImage(1920, 1080,0,1);
-        $imagickSrc->writeImage($imgPath);
+        $imagickDst->writeImage($imgPath);
+
+        return $imagickSrc->getImageGeometry();
     }
 }

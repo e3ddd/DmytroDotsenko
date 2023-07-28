@@ -11,7 +11,6 @@ const CreatePainting = defineAsyncComponent(() => import ("../components/Backend
 const UpdatePainting = defineAsyncComponent(() => import("../components/Backend/CreatePainting/UpdatePainting.vue"));
 const PaintingPage = defineAsyncComponent(() => import("../components/Frontend/Body/PaintingPage.vue"));
 const Body = defineAsyncComponent(() => import("../components/Frontend/Body/Body.vue"));
-const PageByCategory = defineAsyncComponent(() => import('../components/Frontend/Body/ByCategory/PageByCategory.vue'));
 
 
 const routes = [
@@ -32,7 +31,7 @@ const routes = [
             {
                 path: '/:category_slug/:subcategory_slug',
                 name: 'category',
-                component: PageByCategory
+                component: Body
             },
         ]
     },

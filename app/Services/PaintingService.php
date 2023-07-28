@@ -38,9 +38,9 @@ class PaintingService
         return $this->paintingRepository->getPaintingBySlug($slug);
     }
 
-    public function getPaintingByCategory($category_slug)
+    public function getPaintingByCategory($subcategory_slug, $category_slug)
     {
-        return $this->paintingRepository->getPaintingByCategory($category_slug);
+        return $this->paintingRepository->getPaintingByCategory($subcategory_slug, $category_slug);
     }
 
     public function storePainting($painting)

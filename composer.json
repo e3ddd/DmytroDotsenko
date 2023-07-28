@@ -5,13 +5,13 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
-        "php": "^8.0.2",
+        "php": ">=8",
         "ext-http": "*",
         "ext-imagick": "*",
         "doctrine/dbal": "^3.6",
         "guzzlehttp/guzzle": "^7.2",
         "jorenvanhocht/laravel-share": "^4.2",
-        "laravel/framework": "^9.19",
+        "laravel/framework": "9.*",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7"
     },

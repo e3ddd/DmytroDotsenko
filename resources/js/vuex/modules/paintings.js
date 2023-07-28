@@ -34,6 +34,12 @@ export default {
 
         setCurrentPainting(state, payload){
             state.current_painting = payload
+        },
+
+        filterPaintings(state, payload){
+            state.paintings = state.paintings.filter((item, key) => {
+                 return key !== payload
+            })
         }
     },
 
@@ -70,7 +76,8 @@ export default {
         getPaintingByCategorySlug(context, payload) {
             axios.get('/api/get-painting-by-category-slug', {
                 params: {
-                    category_slug: payload
+                    category_slug: payload.category_slug,
+                    subcategory_slug: payload.subcategory_slug,
                 }
             })
                 .then((response) => {

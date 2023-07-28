@@ -46,23 +46,29 @@ class PaintingImagesRepository implements CheckNullableInterface
 
     public function storeImages($paintingId, $hash_id)
     {
-        $this->checkNullable([$paintingId, $hash_id]);
-        $this->paintingImage->create([
-            'painting_id' => $paintingId,
-            'hash_id' => $hash_id,
-        ]);
+
 
     }
 
-    public function saveImages($storeName, $file)
+    public function saveImages($paintingId, $hash_id, $storeName, $file)
     {
-        $this->checkNullable([$storeName]);
-        $file->storeAs('/public/images', $storeName);
-        $imgPath = storage_path() . '/app/public/images/' . $storeName;
 
+        $this->checkNullable([$paintingId, $hash_id, $storeName]);
+
+//        $file->storeAs('/public/images', $storeName);
+        $imgPath = storage_path() . '/app/public/images/' . $storeName;
+        $geometry = [];
         if($file->storeAs('/public/images', $storeName)){
-            ImageProcess::process($imgPath);
+            $geometry = ImageProcess::process($imgPath);
         }
+
+        $this->paintingImage->create([
+            'painting_id' => $paintingId,
+            'hash_id' => $hash_id,
+            'width' => $geometry['width'],
+            'height' => $geometry['height'],
+        ]);
+
     }
 
     public function deleteImage($image_id)

@@ -2,8 +2,12 @@
     <div class="container-fluid">
         <div class="row header">
 
-            <HeaderMob v-if="this.width <= 981"/>
-            <Header v-if="this.width > 981"/>
+            <HeaderMob
+                class="mobile"
+            />
+            <Header
+                class="desctop"
+            />
         </div>
         <div class="row">
             <router-view></router-view>
@@ -40,18 +44,26 @@ export default {
     mounted() {
         this.$store.dispatch('getCategories');
         this.$store.dispatch('setDefaultLanguage');
-        this.width = window.innerWidth;
     }
 }
 </script>
 
-<style scoped>
-img {
-    width: 20%;
-    height: 70vh;
+<style>
+.header {
+    z-index: 3;
 }
 
-.header {
-    z-index: 999999
+.mobile {
+    display: none;
+}
+
+@media (max-width: 1024px){
+    .mobile {
+        display: block !important;
+    }
+
+    .desctop {
+        display: none !important;
+    }
 }
 </style>
