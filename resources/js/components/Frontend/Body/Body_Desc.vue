@@ -7,7 +7,9 @@
             <div v-for="(painting, key) in $store.getters.getAllPaintings">
                 <div class="painting" :id="'painting_' + key">
                     <div class="row">
-                        <router-link :to="'/' + painting.slug"><img :src="'/storage/images/' + painting.images[0].painting_id + '_' + painting.images[0].hash_id" :alt="painting.name_en"></router-link>
+                        <router-link :to="'/' + painting.slug">
+                            <img :src="'/storage/images/' + painting.images[0].painting_id + '_' + painting.images[0].hash_id" :alt="painting.name_en">
+                        </router-link>
                     </div>
                     <div class="row pt-3">
                         <div class="col name">

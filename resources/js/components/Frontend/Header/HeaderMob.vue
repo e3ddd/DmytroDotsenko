@@ -10,7 +10,7 @@
                                     {{category['name_' + $store.getters.getLanguage]}}
                                 </div>
                                 <div class="row mt-3 subcategories" v-for="subcategory in $store.getters.getSubcategories" v-if="this.show_sub == category.id">
-                                    <router-link :to="'/' + category.name_en.toLowerCase() + '/' + subcategory.slug" :id="subcategory.slug" @click="setPaintingsByCategory">{{subcategory['name_' + $store.getters.getLanguage]}}</router-link>
+                                    <router-link :to="'/' + category.name_en.toLowerCase() + '/' + subcategory.slug" :data-subcategory="subcategory.slug" :data-category="category.slug" @click="setPaintingsByCategory">{{subcategory['name_' + $store.getters.getLanguage]}}</router-link>
                                 </div>
                             </div>
                         </div>
@@ -106,7 +106,10 @@ export default {
         },
 
         setPaintingsByCategory(e){
-            this.$store.dispatch('getPaintingByCategorySlug', e.target.id);
+            this.$store.dispatch('getPaintingByCategorySlug', {
+                category_slug: e.target.dataset.category,
+                subcategory_slug: e.target.dataset.subcategory,
+            });
         },
 
         openMenu(active) {
