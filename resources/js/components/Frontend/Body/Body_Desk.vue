@@ -74,18 +74,14 @@ export default {
             const painting = document.getElementById(this.painting.alias + this.painting.key);
             const slider = document.querySelector('.paintings');
             if(this.painting.key === --Object.entries(this.$store.getters.getAllPaintings).length){
-                this.painting.key = 0;
-                this.offset = 0
-                slider.style.left = this.offset + 'px';
                 return;
             }
 
             this.offset -= painting.offsetWidth
             painting.animate(animation, timing);
-            setTimeout(() => {
-                slider.style.left = this.offset + 'px';
-                ++this.painting.key
-            }, 100)
+            slider.style.left = this.offset + 'px';
+            ++this.painting.key
+
         },
 
         prev() {

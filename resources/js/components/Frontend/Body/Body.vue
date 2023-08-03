@@ -1,6 +1,6 @@
 <template>
         <Body_Desc
-           class="desctop"
+           class="desktop"
         />
         <Body_Mob
             class="mobile"
@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import Body_Desc from "./Body_Desc.vue";
+import Body_Desc from "./Body_Desk.vue";
 import Body_Mob from "./Body_Mob.vue";
 
 export default {

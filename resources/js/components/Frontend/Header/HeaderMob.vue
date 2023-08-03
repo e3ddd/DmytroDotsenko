@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid header">
+    <div class="container-fluid header mobile">
         <div class="row nav-menu-row" v-if="this.active">
             <div class="col p-5 nav-menu" :class="this.animate">
                 <div class="row" v-for="category in this.$store.getters.getAllCategories">
@@ -79,7 +79,7 @@ export default {
             trans: {
               home: {
                   en: 'Home',
-                  ua: 'Домівка',
+                  ua: 'Головна',
               }
             },
 

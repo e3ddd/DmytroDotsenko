@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid">
+    <div class="container-fluid desktop">
         <div class="row">
             <div class="col p-5 label">
                 <span class="display-5" ref="observe">
@@ -9,10 +9,10 @@
             <div class="col d-flex justify-content-center align-items-center">
                 <div class="row">
                     <div class="col" v-for="category in $store.getters.getAllCategories">
-                        <div class="row mt-1" style="cursor: pointer;" @click="showSubcategories" :id="category.id"  v-if="category.parent_id == null">
+                        <div class="row mt-1" style="cursor: pointer;" @mouseover="showSubcategories" :id="category.id"  v-if="category.parent_id == null">
                             {{category['name_' + $store.getters.getLanguage]}}
                         </div>
-                        <div class="subcategories">
+                        <div class="subcategories" @mouseleave="showSubcategories">
                             <div class="" v-for="subcategory in $store.getters.getSubcategories" v-if="this.show_sub == category.id">
                                 <div class="link">
                                     <router-link :to="'/' + category.name_en.toLowerCase() + '/' + subcategory.slug" :data-subcategory="subcategory.slug" :data-category="category.slug" @click="setPaintingsByCategory">{{subcategory['name_' + $store.getters.getLanguage]}}</router-link>
@@ -125,16 +125,21 @@ a {
 }
 
 .subcategories {
+    min-height: 60px;
     position: absolute;
     background: black;
     margin-top: 10px;
-    margin-left: -50px;
+    margin-left: -12px;
+}
+
+.link {
 }
 
 .link a {
     position: relative;
-    margin: 50px;
     color: white;
+    padding: 10px;
+    margin-right: 50px;
 }
 
 .current_language {

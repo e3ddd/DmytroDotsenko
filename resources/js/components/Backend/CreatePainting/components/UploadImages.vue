@@ -2,7 +2,7 @@
     <div class="row mb-2">
         <div class="col p-0 d-flex justify-content-center align-items-center">
             <label class="upload-painting" for="upload-painting" style="padding: 100px;" v-if="this.files.length === 0">
-                <span>Добавити фотографію...</span>
+                <span>Додати фотографію...</span>
             </label>
             <img v-if="this.files.length > 0" :src="this.files[0].url" alt="main-img" height="400">
         </div>

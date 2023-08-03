@@ -1,19 +1,15 @@
 <template>
     <div class="container-fluid">
         <div class="row header">
-
             <HeaderMob
                 class="mobile"
             />
             <Header
-                class="desctop"
+                class="desktop"
             />
         </div>
-        <div class="row">
+        <div class="row content">
             <router-view></router-view>
-        </div>
-        <div class="row mt-5">
-
         </div>
     </div>
 </template>
@@ -54,7 +50,7 @@ export default {
 }
 
 .mobile {
-    display: none;
+    display: none !important;
 }
 
 @media (max-width: 1024px){
@@ -62,7 +58,7 @@ export default {
         display: block !important;
     }
 
-    .desctop {
+    .desktop {
         display: none !important;
     }
 }

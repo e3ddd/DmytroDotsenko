@@ -3,6 +3,7 @@ export default {
         paintings: [],
         total: 0,
         current_painting: [],
+        current_image: [],
     },
 
     getters: {
@@ -20,6 +21,10 @@ export default {
 
         getCurrentPainting(state) {
             return state.current_painting;
+        },
+
+        getCurrentImage(state) {
+            return state.current_image;
         }
     },
 
@@ -39,6 +44,12 @@ export default {
         filterPaintings(state, payload){
             state.paintings = state.paintings.filter((item, key) => {
                  return key !== payload
+            })
+        },
+
+        setCurrentImage(state, payload) {
+            state.current_image = state.current_painting.images.filter((item) => {
+                return item.id == payload;
             })
         }
     },
