@@ -41,6 +41,11 @@ class CategoriesRepository implements CheckNullableInterface
         return $this->category->all();
     }
 
+    public function getCategoryById($category_id)
+    {
+        return $this->category->find($category_id);
+    }
+
     public function getParentCategories()
     {
         return $this->category->where('parent_id', null)->get();
@@ -56,11 +61,11 @@ class CategoriesRepository implements CheckNullableInterface
         $this->category->create($category);
     }
 
-    public function updateCategory($category)
+    public function editCategoryById($category)
     {
         $this->checkNullable($category);
 
-        Category::find($category['category_id'])->update($category);
+        Category::find($category['id'])->update($category);
     }
 
     public function deleteCategory($category_id)

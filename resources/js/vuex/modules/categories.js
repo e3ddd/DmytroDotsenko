@@ -1,5 +1,6 @@
 export default {
     state: {
+        current_category: [],
         categories: [],
         parent_categories: [],
         subcategories: [],
@@ -18,6 +19,10 @@ export default {
             state.parent_categories = payload
         },
 
+        setCurrentCategory(state, payload) {
+            state.current_category = payload
+        },
+
         deleteCategory(state, payload) {
             state.categories = state.categories.filter(item => item.id != payload)
         }
@@ -29,18 +34,32 @@ export default {
         },
 
         getParentCategories(state) {
-            return state.parent_categories
+            return state.parent_categories;
         },
 
         getSubcategories(state) {
-            return state.subcategories
-        }
+            return state.subcategories;
+        },
+
+        getCategoryById(state){
+            return state.current_category;
+        },
     },
 
     actions: {
         getParentCategories(context) {
           axios.get('/api/get-parent-categories')
               .then(response => context.commit('setParentCategories', response.data))
+              .catch(err => console.log(err))
+        },
+
+        getCategoryById(context, payload) {
+          axios.get('/api/get-category-by-id', {
+              params: {
+                  category_id: payload
+              }
+          })
+              .then(response => context.commit('setCurrentCategory', response.data))
               .catch(err => console.log(err))
         },
 

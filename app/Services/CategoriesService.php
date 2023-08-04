@@ -18,6 +18,11 @@ class CategoriesService
         return $this->categoriesRepository->getAllCategories();
     }
 
+    public function getCategoryById($category_id)
+    {
+        return $this->categoriesRepository->getCategoryById($category_id);
+    }
+
     public function getParentCategories()
     {
         return $this->categoriesRepository->getParentCategories();
@@ -33,9 +38,9 @@ class CategoriesService
         $this->categoriesRepository->storeCategory($category);
     }
 
-    public function updateCategory($category)
+    public function editCategoryById($category)
     {
-        $this->categoriesRepository->updateCategory($category);
+        $this->categoriesRepository->editCategoryById($category);
     }
 
     public function deleteCategory($category_id)

@@ -20,6 +20,11 @@ class CategoriesController extends Controller
         return $this->categoryService->getAllCategories();
     }
 
+    public function getCategoryById(Request $request)
+    {
+        return $this->categoryService->getCategoryById($request->category_id);
+    }
+
     public function getParentCategories()
     {
         return $this->categoryService->getParentCategories();
@@ -38,6 +43,11 @@ class CategoriesController extends Controller
     public function updateCategory(Request $request)
     {
         $this->categoryService->updateCategory($request->category);
+    }
+
+    public function editCategoryById(Request $request)
+    {
+        $this->categoryService->editCategoryById($request->category);
     }
 
     public function deleteCategory(Request $request)

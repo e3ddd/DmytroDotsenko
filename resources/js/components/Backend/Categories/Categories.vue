@@ -1,5 +1,9 @@
 <template>
     <alert-messages/>
+    <edit-category-modal
+        v-if="showEdit"
+        @show="closeModal"
+    />
     <create-category-model
         v-if="show"
         @show="closeModal"
@@ -45,6 +49,7 @@
                     {{category.slug}}
                 </div>
                 <div class="col-2 d-flex justify-content-end">
+                    <img src="../../../images/edit-btn.png" :id="category.id" @click="showEditModal" alt="edit" width="25"/>
                     <img src="../../../images/delete-btn.png" :id="category.id" @click="deleteCategory" alt="delete" width="25"/>
                 </div>
             </div>
@@ -53,22 +58,32 @@
 </template>
 
 <script>
-import CreateCategoryModel from "./components/CreateCategoryModel.vue";
+import CreateCategoryModel from "./components/CreateCategoryModal.vue";
 import Loader from "../../UI/Loader.vue";
 import AlertMessages from "../../UI/AlertMessages.vue";
+import EditCategoryModal from "./components/EditCategoryModal.vue";
+
 export default {
     components: {
+        EditCategoryModal,
         Loader,
         CreateCategoryModel,
         AlertMessages,
     },
     data(){
         return {
+            showEdit: false,
             show: false,
         }
     },
 
     methods: {
+        async showEditModal(e){
+            this.$store.dispatch('getCategoryById', e.target.id)
+
+            this.showEdit = true;
+        },
+
         async deleteCategory(e){
             axios.post('/api/delete-category', {
                 category_id: e.target.id
@@ -97,7 +112,8 @@ export default {
         },
 
         closeModal(show){
-          this.show = show
+            this.show = show
+            this.showEdit = show
         },
 
         getCategories(){

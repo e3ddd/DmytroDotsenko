@@ -26,8 +26,10 @@ Route::get('/admin/login/log', [LoginController::class, 'login']);
 Route::prefix('api')
     ->group(function() {
         Route::get('/get-all-categories', [CategoriesController::class, 'getAllCategories']);
+        Route::get('/get-category-by-id', [CategoriesController::class, 'getCategoryById']);
         Route::get('/get-parent-categories', [CategoriesController::class, 'getParentCategories']);
         Route::get('/get-subcategories', [CategoriesController::class, 'getSubcategories']);
+        Route::post('/edit-category', [CategoriesController::class, 'editCategoryById']);
         Route::post('/store-category', [CategoriesController::class, 'storeCategory']);
         Route::post('/delete-category', [CategoriesController::class, 'deleteCategory']);
         Route::post('/update-category', [CategoriesController::class, 'updateCategory']);
