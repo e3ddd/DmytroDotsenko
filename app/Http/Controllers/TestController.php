@@ -18,13 +18,7 @@ class TestController extends Controller
 {
     public function test()
     {
-        $email = 'stepandocenko490@gmail.com';
-
-        $painting = collect([
-            'name' => 'Test painting',
-            'price' => 2000,
-            'image' => ''
-        ]);
+        dump(phpinfo());
 
 
     }

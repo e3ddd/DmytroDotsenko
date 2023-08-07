@@ -19,7 +19,7 @@
                         <b>Category name</b>
                     </div>
                     <div class="col-2 d-flex justify-content-center">
-                        <b>Батьківська (Так або ID батьківської категорії)</b>
+                        <b>Батьківська (Так або ім'я батьківської категорії)</b>
                     </div>
                     <div class="col-2 d-flex justify-content-center">
                         <b>Слаг</b>
@@ -43,7 +43,9 @@
                     Так
                 </div>
                 <div class="col-2 d-flex justify-content-center align-items-center" v-else>
-                    {{category.parent_id}}
+                    {{$store.getters.getParentCategories.filter((item) => {
+                            return item.id === category.parent_id
+}                   )[0].name_ua}}
                 </div>
                 <div class="col-2 d-flex justify-content-center align-items-center">
                     {{category.slug}}

@@ -82,6 +82,22 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-4">
+            Категорія
+        </div>
+        <div class="col">
+            {{$store.getters.getCategoryById.name_ua}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            Порядок відображення
+        </div>
+        <div class="col">
+            {{painting.order}}
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-4">
@@ -112,6 +128,12 @@ export default {
     components: {
         ContentBtns,
         DeletePaintingModal,
+    },
+
+    created() {
+      setTimeout(() => {
+          this.$store.dispatch('getCategoryById', this.painting.category_id)
+      }, 100)
     },
 
     data() {

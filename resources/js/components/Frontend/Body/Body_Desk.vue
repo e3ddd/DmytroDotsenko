@@ -4,7 +4,7 @@
         this.show_next = false
     }" @mousemove="mouseCord">
         <div class="paintings">
-            <div v-for="(painting, key) in $store.getters.getAllPaintings">
+            <div v-for="(painting, key) in paintings">
                 <div class="painting" :id="'painting_' + key">
                     <div class="row">
                         <router-link :to="'/' + painting.slug">
@@ -29,14 +29,16 @@
                 </div>
             </div>
         </div>
-        <div class="prev" @click="prev" v-if="this.show_prev">&#60;</div>
-        <div class="next" @click="next" v-if="this.show_next">&#62;</div>
+        <div class="carousel-btns" v-if="show_btns">
+            <div class="prev" @click="prev" v-if="this.show_prev">&#60;</div>
+            <div class="next" @click="next" v-if="this.show_next">&#62;</div>
+        </div>
     </div>
 </template>
 
 <script>
 
-
+import { mapGetters } from 'vuex'
 export default {
     data: () => ({
         painting: {
@@ -46,11 +48,42 @@ export default {
         offset: 0,
         show_next: false,
         show_prev: false,
+        show_btns: '',
     }),
+
+    mounted() {
+        this.$store.dispatch('getAllPaintings');
+    },
+
+    watch: {
+        paintings(newValue, oldValue){
+            const slider = document.querySelector('.paintings');
+
+            slider.style.left = 0 + 'px'
+          setTimeout(() => {
+              let width = 0;
+              for (const paintingKey in newValue) {
+                  const painting = document.getElementById('painting_' + paintingKey);
+                  width += painting.offsetWidth
+              }
+
+              if(window.screen.width > width){
+                  this.show_btns = false
+              }else{
+                  this.show_btns = true
+              }
+          }, 100)
+        }
+    },
+
+    computed: {
+        ...mapGetters({
+            paintings: 'getAllPaintings',
+        })
+    },
 
     methods: {
         mouseCord(e){
-
             if(window.innerWidth / 2 > e.clientX){
                 this.show_next = false
                 this.show_prev = true
@@ -60,8 +93,6 @@ export default {
                 this.show_prev = false
                 this.show_next = true
             }
-            // console.log(e.clientX)
-            // console.log(e.clientY)
         },
 
         next() {

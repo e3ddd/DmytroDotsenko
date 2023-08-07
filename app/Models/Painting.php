@@ -26,6 +26,7 @@ class Painting extends Model
         'long',
         'sold_status',
         'slug',
+        'order',
         'category_id'
     ];
 

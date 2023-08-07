@@ -1,19 +1,58 @@
 <template>
-    <div class="row mb-2 p-0">
+    <div class="row mb-2">
         <div class="col p-0">
             <div class="row">
                 <div class="col">
-                    <label for="">Категорія</label>
+                    <label for="">Батьківська категорія</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <select name="categories" v-model="painting.category_id">
+                        <option disabled selected>Обрати категорію...</option>
+                        <option :value="category.id" v-for="category in this.$store.getters.getAllCategories.filter((item) => {
+                            return item.parent_id === null
+                        })">
+                            {{category.name_ua}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col p-0">
+            <div class="row">
+                <div class="col">
+                    <label for="">Підкатегорія</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <select name="categories" v-model="painting.subcategory_id">
+                        <option disabled selected>Обрати категорію...</option>
+                        <option :value="category.id" v-for="category in $store.getters.getAllCategories.filter((item) => {
+                            return item.parent_id === painting.category_id
+                        })">
+                            {{category.name_ua}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col p-0">
+            <div class="row">
+                <div class="col">
+                    <label>
+                        Порядок відображення
+                    </label>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
-                    <select name="categories" v-model="painting.category_id">
-                        <option disabled selected>Обрати категорію...</option>
-                        <option :value="category.id" v-for="category in $store.getters.getAllCategories">
-                            {{category.name_ua}}
-                        </option>
-                    </select>
+                    <input type="number" v-model="painting.order">
                 </div>
             </div>
         </div>

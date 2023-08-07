@@ -66,6 +66,8 @@ export default {
               long: 0,
               sold_status: '',
               category_id: '',
+              subcategory_id: '',
+              order: 0,
           },
           images: [],
       }
@@ -84,6 +86,9 @@ export default {
         },
 
         async store() {
+            if(this.painting.subcategory_id !== ''){
+                this.painting.category_id = this.painting.subcategory_id;
+            }
             if(this.images.length !== 0){
                 let fd = new FormData()
                 this.images[0].map((item, key) => fd.append('images[' + key + ']', item.file, item.file.name));
@@ -101,6 +106,7 @@ export default {
                 fd.append('painting[height]', this.painting.height)
                 fd.append('painting[long]', this.painting.long)
                 fd.append('painting[category_id]', this.painting.category_id)
+                fd.append('painting[order]', this.painting.order)
 
                 if(this.painting.sold_status){
                     this.painting.sold_status = 1
@@ -131,6 +137,8 @@ export default {
                         this.style = ''
                         this.height = ''
                         this.long = ''
+                        this.order = ''
+                        this.slug = ''
 
                     })
                     .catch((err) => {

@@ -24,8 +24,10 @@
 
 <script>
 import BackgroundImage from "../../../UI/BackgroundImage.vue";
+import DeleteImageModal from "./DeleteImageModal.vue";
 export default {
     components: {
+        DeleteImageModal,
         BackgroundImage,
     },
 

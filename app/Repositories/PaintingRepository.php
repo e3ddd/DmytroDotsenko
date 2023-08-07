@@ -44,7 +44,7 @@ class PaintingRepository implements CheckNullableInterface
 
     public function getAllPaintings()
     {
-        return $this->painting->with('images')->get();
+        return $this->painting->with('images')->orderBy('order')->get();
     }
 
     public function getAllPaintingsWithPagination()
@@ -75,7 +75,7 @@ class PaintingRepository implements CheckNullableInterface
 
         $parent_id = Category::where('slug', $category_slug)->first()->id;
 
-        $category_id = Category::where('parent_id', $parent_id)->where('slug', $subcategory_slug)->first()->id ?? null;
+        $category_id = Category::where('parent_id', $parent_id)->where('slug', $subcategory_slug)->first()->id ?? $parent_id;
 
         return $this->painting->where('category_id', $category_id)->with('images')->get();
 

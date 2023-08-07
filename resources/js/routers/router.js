@@ -29,8 +29,13 @@ const routes = [
                 component: PaintingPage
             },
             {
-                path: '/:category_slug/:subcategory_slug',
+                path: '/:category_slug',
                 name: 'category',
+                component: Body,
+            },
+            {
+                path: '/:category_slug/:subcategory_slug',
+                name: 'subcategory',
                 component: Body
             },
         ]

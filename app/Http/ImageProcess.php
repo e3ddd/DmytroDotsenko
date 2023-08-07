@@ -17,7 +17,7 @@ class ImageProcess
         ];
         $imagickDst = new Imagick();
         $imagickDst->setCompression((int)$compressionList);
-        $imagickDst->setCompressionQuality(60);
+        $imagickDst->setCompressionQuality(20);
         $imagickDst->newPseudoImage(
             $imagickSrc->getImageWidth(),
             $imagickSrc->getImageHeight(),

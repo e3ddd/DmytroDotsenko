@@ -13,17 +13,17 @@ import Body_Mob from "./Body_Mob.vue";
 
 export default {
     components: {Body_Mob, Body_Desc},
-    data: () =>({
-        width: '',
-    }),
-
-    mounted() {
-        this.$store.dispatch('getAllPaintings');
-        this.width = window.innerWidth;
-    }
 }
 </script>
 
 <style scoped>
+.desktop {
+    opacity: 0;
+    animation: ani 1s forwards;
+}
 
+@keyframes ani {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
 </style>

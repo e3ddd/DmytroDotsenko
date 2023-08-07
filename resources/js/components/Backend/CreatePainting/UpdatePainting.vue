@@ -63,6 +63,9 @@ export default {
                 height: 0,
                 long: 0,
                 sold_status: '',
+                category_id: '',
+                subcategory_id: '',
+                order: 0,
             },
 
             images: [],
@@ -76,6 +79,7 @@ export default {
 
     mounted() {
         this.getPainting()
+        this.$store.dispatch('getCategories')
     },
 
     methods: {
@@ -90,7 +94,9 @@ export default {
 
         updateImage(image) {
             this.storeImage(this.$route.params.id, image)
-            location.reload()
+            setTimeout(() => {
+                location.reload()
+            }, 10)
         },
 
         async getPainting(){
@@ -163,6 +169,11 @@ export default {
                 this.painting.sold_status = 0
             }
 
+            if(this.painting.subcategory_id !== ''){
+                this.painting.category_id = this.painting.subcategory_id;
+            }
+
+            fd.append('painting[category_id]', this.painting.category_id)
             fd.append('painting[slug]', this.painting.slug)
             fd.append('painting[name_ua]', this.painting.name_ua)
             fd.append('painting[name_en]', this.painting.name_en)
@@ -177,6 +188,7 @@ export default {
             fd.append('painting[height]', this.painting.height)
             fd.append('painting[long]', this.painting.long)
             fd.append('painting[sold_status]', this.painting.sold_status)
+            fd.append('painting[order]', this.painting.order)
 
             fd.append('painting_id', this.$route.params.id)
 
@@ -186,21 +198,29 @@ export default {
                 }
             })
                 .then((response) => {
-                    this.alert_message.type = 'success'
-                    this.alert_message.content = 'Зміни внесені до каталогу'
+
+                    this.$store.commit('setMessage', {
+                        content: 'Зміни внесені до каталогу',
+                        type: 'success'
+                    })
 
                     setTimeout(() => {
-                        this.alert_message.type = ''
-                        this.alert_message.content = ''
+                        this.$store.commit('setMessage', {
+                            content: '',
+                            type: ''
+                        })
                     }, 5000)
                 })
                 .catch(err => {
-                    console.log(err)
-                    this.alert_message.content = err.response.data.message
-                    this.alert_message.type = 'error'
+                    this.$store.commit('setMessage', {
+                        content: err.response.data.message,
+                        type: 'error'
+                    })
                     setTimeout(() => {
-                        this.alert_message.type = ''
-                        this.alert_message.content = ''
+                        this.$store.commit('setMessage', {
+                            content: '',
+                            type: ''
+                        })
                     }, 5000)
                 })
         },

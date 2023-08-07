@@ -29,14 +29,7 @@
 
 <script>
 export default {
-    data: () =>({
-        width: '',
-    }),
 
-    mounted() {
-        this.$store.dispatch('getAllPaintings');
-        this.width = window.innerWidth;
-    }
 }
 </script>
 
