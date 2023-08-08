@@ -86,7 +86,7 @@ class PaintingRepository implements CheckNullableInterface
 
         $category_id = Category::where('parent_id', $parent_id)->where('slug', $subcategory_slug)->first()->id ?? $parent_id;
 
-        return $this->painting->where('category_id', $category_id)->with('images')->get();
+        return $this->painting->where('category_id', $category_id)->orderBy('order')->with('images')->get();
 
     }
 
