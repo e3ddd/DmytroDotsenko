@@ -105,7 +105,7 @@ export default {
                 fd.append('painting[style_en]', this.painting.style_en)
                 fd.append('painting[height]', this.painting.height)
                 fd.append('painting[long]', this.painting.long)
-                fd.append('painting[category_id]', this.painting.category_id)
+                fd.append('painting[category_id]', this.painting.subcategory_id)
                 fd.append('painting[order]', this.painting.order)
 
                 if(this.painting.sold_status){

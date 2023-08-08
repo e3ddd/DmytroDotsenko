@@ -11,6 +11,9 @@
                     <div class="col" v-for="category in $store.getters.getAllCategories">
                         <div class="row mt-1" style="cursor: pointer;" v-if="category.parent_id == null">
                             <router-link
+                                :data-subcategory="''"
+                                :data-category="category.slug"
+                                @click="setPaintingsByCategory"
                                 @mouseover="showSubcategories" :id="category.id"
                                 :to="{
                                 name: 'category',
@@ -88,13 +91,6 @@ export default {
             current_language: {
                 EN: '',
                 UA: 'current_language',
-            },
-
-            trans: {
-                home: {
-                    en: 'Home',
-                    ua: 'Домівка',
-                }
             },
 
             show_sub: false,

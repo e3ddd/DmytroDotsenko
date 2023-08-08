@@ -26,7 +26,6 @@ class PaintingImagesController extends Controller
 
     public function storeImage(Request $request)
     {
-        dd($request->all());
         $this->paintingImagesService->storeImages($request->painting_id, $request->image);
     }
 

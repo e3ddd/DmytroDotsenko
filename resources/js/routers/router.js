@@ -26,6 +26,7 @@ const routes = [
             },
             {
                 path: '/:painting_slug',
+                name: 'painting_page',
                 component: PaintingPage
             },
             {

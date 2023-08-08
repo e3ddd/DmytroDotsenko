@@ -8,7 +8,7 @@
             </div>
             <div class="row">
                 <div class="col-3">
-                    <select name="categories" v-model="painting.category_id">
+                    <select name="categories" v-model="painting.category_id" @change="painting.subcategory_id = ''">
                         <option disabled selected>Обрати категорію...</option>
                         <option :value="category.id" v-for="category in this.$store.getters.getAllCategories.filter((item) => {
                             return item.parent_id === null

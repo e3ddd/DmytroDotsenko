@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\CheckNullableParams;
 use App\Http\Controllers\Auth\PaintingController;
 use App\Mail\OrderMail;
+use App\Models\Category;
 use App\Models\Painting;
 use App\Models\User;
 use App\Repositories\PaintingRepository;
@@ -18,7 +19,9 @@ class TestController extends Controller
 {
     public function test()
     {
-        dump(phpinfo());
+        $category = Category::where('id', [1,4,5,9]);
+
+        dump($category);
 
 
     }

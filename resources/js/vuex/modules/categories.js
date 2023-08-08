@@ -59,7 +59,9 @@ export default {
                   category_id: payload
               }
           })
-              .then(response => context.commit('setCurrentCategory', response.data))
+              .then(response => {
+                  context.commit('setCurrentCategory', response.data)
+              })
               .catch(err => console.log(err))
         },
 

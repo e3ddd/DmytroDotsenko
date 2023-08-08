@@ -15,10 +15,6 @@ export default {
             return state.total;
         },
 
-        getPaintingByCategorySlug(state){
-          return state.paintings
-        },
-
         getCurrentPainting(state) {
             return state.current_painting;
         },

@@ -7,7 +7,12 @@
             <div v-for="(painting, key) in paintings">
                 <div class="painting" :id="'painting_' + key">
                     <div class="row">
-                        <router-link :to="'/' + painting.slug">
+                        <router-link :to="{
+                            name: 'painting_page',
+                            params: {
+                                painting_slug: painting.slug
+                            }
+                        }">
                             <img :src="'/storage/images/' + painting.images[0].painting_id + '_' + painting.images[0].hash_id" :alt="painting.name_en">
                         </router-link>
                     </div>
@@ -60,7 +65,7 @@ export default {
             const slider = document.querySelector('.paintings');
 
             slider.style.left = 0 + 'px'
-          setTimeout(() => {
+            setTimeout(() => {
               let width = 0;
               for (const paintingKey in newValue) {
                   const painting = document.getElementById('painting_' + paintingKey);
@@ -72,7 +77,7 @@ export default {
               }else{
                   this.show_btns = true
               }
-          }, 100)
+            }, 100)
         }
     },
 

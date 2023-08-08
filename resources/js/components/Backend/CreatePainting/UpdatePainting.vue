@@ -52,7 +52,7 @@ export default {
                 slug: '',
                 name_ua: '',
                 name_en: '',
-                price: 0,
+                price: '',
                 description_ua: '',
                 description_en: '',
                 year: '',
@@ -173,11 +173,18 @@ export default {
                 this.painting.category_id = this.painting.subcategory_id;
             }
 
-            fd.append('painting[category_id]', this.painting.category_id)
             fd.append('painting[slug]', this.painting.slug)
             fd.append('painting[name_ua]', this.painting.name_ua)
             fd.append('painting[name_en]', this.painting.name_en)
-            fd.append('painting[price]', this.painting.price)
+
+            if(this.painting.price != null){
+                fd.append('painting[price]', this.painting.price)
+            }
+
+            if(this.painting.category_id != null){
+                fd.append('painting[category_id]', this.painting.category_id)
+            }
+
             fd.append('painting[description_ua]', this.painting.description_ua)
             fd.append('painting[description_en]', this.painting.description_en)
             fd.append('painting[year]', this.painting.year)
@@ -189,6 +196,7 @@ export default {
             fd.append('painting[long]', this.painting.long)
             fd.append('painting[sold_status]', this.painting.sold_status)
             fd.append('painting[order]', this.painting.order)
+
 
             fd.append('painting_id', this.$route.params.id)
 

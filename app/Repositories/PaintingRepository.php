@@ -71,9 +71,18 @@ class PaintingRepository implements CheckNullableInterface
 
     public function getPaintingByCategory($subcategory_slug, $category_slug)
     {
-        $this->checkNullable([$subcategory_slug, $category_slug]);
+        $this->checkNullable([$subcategory_slug, $category_slug], [$subcategory_slug]);
 
         $parent_id = Category::where('slug', $category_slug)->first()->id;
+
+        if($subcategory_slug === null){
+            $subcategories = Category::where('parent_id', $parent_id)->get()->toArray();
+            $tmp = array_map(function($item){
+                return $item['id'];
+            }, $subcategories);
+
+            return $this->painting->whereIn('category_id', $tmp)->with('images')->get();
+        }
 
         $category_id = Category::where('parent_id', $parent_id)->where('slug', $subcategory_slug)->first()->id ?? $parent_id;
 
@@ -83,7 +92,7 @@ class PaintingRepository implements CheckNullableInterface
 
     public function storePainting($painting)
     {
-        $this->checkNullable($painting, ['price']);
+        $this->checkNullable($painting, ['price', 'description_ua', 'description_en']);
 
         $this->painting->create($painting);
 

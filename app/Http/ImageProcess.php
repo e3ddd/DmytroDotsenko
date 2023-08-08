@@ -17,7 +17,6 @@ class ImageProcess
         ];
         $imagickDst = new Imagick();
         $imagickDst->setCompression((int)$compressionList);
-        $imagickDst->setCompressionQuality(20);
         $imagickDst->newPseudoImage(
             $imagickSrc->getImageWidth(),
             $imagickSrc->getImageHeight(),
@@ -30,8 +29,9 @@ class ImageProcess
             0,
             0
         );
-        $imagickDst->setImageFormat("jpg");
-//        $imagickSrc->resizeImage(1920, 1080,0,1);
+        $imagickDst->setImageFormat('webp');
+        $imagickDst->setImageCompressionQuality(50);
+        $imagickDst ->setOption('webp:lossless', 'true');
         $imagickDst->writeImage($imgPath);
 
         return $imagickSrc->getImageGeometry();

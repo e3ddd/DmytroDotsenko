@@ -21,6 +21,16 @@
     </div>
     <div class="row">
         <div class="col-4">
+            Категорія
+        </div>
+        <div class="col">
+            {{this.$store.getters.getCategoryById.name_ua}}
+            /
+            {{this.subcategory.name_ua}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
             Слаг
         </div>
         <div class="col">
@@ -84,14 +94,6 @@
     </div>
     <div class="row">
         <div class="col-4">
-            Категорія
-        </div>
-        <div class="col">
-            {{$store.getters.getCategoryById.name_ua}}
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-4">
             Порядок відображення
         </div>
         <div class="col">
@@ -124,21 +126,38 @@
 <script>
 import DeletePaintingModal from "./DeletePaintingModal.vue";
 import ContentBtns from "../../Buttons/ContentBtns.vue";
+import {mapGetters} from "vuex";
 export default {
     components: {
         ContentBtns,
         DeletePaintingModal,
     },
 
-    created() {
-      setTimeout(() => {
+    mounted() {
+        setTimeout(() => {
           this.$store.dispatch('getCategoryById', this.painting.category_id)
       }, 100)
+
+
+        setTimeout(() => {
+            this.subcategory = this.$store.getters.getCategoryById
+            this.$store.dispatch('getCategoryById', this.subcategory.parent_id)
+      }, 200)
     },
 
     data() {
         return {
             show: false,
+            subcategory: {},
+            category: {}
+        }
+    },
+
+    computed: {
+        categories() {
+            return {
+                parent: this.$store.getters.getCategoryById,
+            }
         }
     },
 
