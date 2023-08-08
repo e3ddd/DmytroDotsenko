@@ -7,8 +7,8 @@
                             :path="'/storage/images/' + image.painting_id + '_' + image.hash_id"
                         />
                 </div>
-                <div class="col p-0 cross" @click="this.$emit('deleteImage', image.id)">
-                    X
+                <div class="col p-0 cross">
+                    <span @click="this.$emit('deleteImage', image.id)">X</span>
                 </div>
             </div>
         </div>
@@ -44,7 +44,7 @@ export default {
                 let image = {file: files[0], url: URL.createObjectURL(files[0])}
                 this.$emit('updateImage', image)
             }
-        }
+        },
     },
 }
 </script>
@@ -77,11 +77,9 @@ label:hover {
     transition: 0.2s;
 }
 
-.cross {
-    cursor: pointer;
-}
 
-.cross:hover {
+.cross span:hover {
+    cursor: pointer;
     color: white;
     transition: 0.2s;
 }
