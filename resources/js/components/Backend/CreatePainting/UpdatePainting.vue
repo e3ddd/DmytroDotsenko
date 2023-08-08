@@ -94,9 +94,9 @@ export default {
 
         updateImage(image) {
             this.storeImage(this.$route.params.id, image)
-            // setTimeout(() => {
-            //     location.reload()
-            // }, 100)
+            setTimeout(() => {
+                location.reload()
+            }, 100)
         },
 
         async getPainting(){
