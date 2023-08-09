@@ -42,7 +42,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col enter-btn">
+                                <div class="col d-flex justify-content-end  enter-btn">
                                     <button @click="login">Вхід</button>
                                 </div>
                             </div>
@@ -142,11 +142,12 @@ export default {
     text-align: center;
 }
 
-.enter-btn {
-    padding: 3px;
-    margin-top: 7px;
-    margin-right: 55px;
-    text-align: end;
+.enter-btn button {
+    padding: 3px 15px 3px 15px;
+    margin-top: 10px;
+    border-radius: 5px;
+    background: none;
+    font-weight: bold;
 }
 
 </style>
