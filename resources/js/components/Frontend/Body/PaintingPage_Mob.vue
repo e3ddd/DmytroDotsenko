@@ -94,7 +94,7 @@ export default {
 .mobile {
     height: 100%;
     padding-bottom: 50px !important;
-    font-size: 36px;
+    font-size: 24px;
     background: #eaeaea;
 }
 
@@ -103,7 +103,7 @@ export default {
 }
 
 .description {
-    font-size: 30px;
+    font-size: 24px;
 }
 
 .buy-btn button {

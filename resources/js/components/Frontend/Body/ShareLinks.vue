@@ -9,7 +9,7 @@
                               quote=""
                               hashtags=""
                 >
-                    <img src="../../../images/facebook.png" alt="facebook icon">
+                    <img src="../../../images/facebook.png" alt="facebook icon" width="35" height="35">
                 </ShareNetwork>
             </div>
             <div class="col">
@@ -21,7 +21,7 @@
                     quote=""
                     hashtags=""
                 >
-                    <img src="../../../images/twitter.png" alt="twitter icon">
+                    <img src="../../../images/twitter.png" alt="twitter icon" width="35" height="35">
                 </ShareNetwork>
             </div>
             <div class="col">
@@ -33,7 +33,7 @@
                     quote=""
                     hashtags=""
                 >
-                    <img src="../../../images/telegram.png" alt="telegram icon">
+                    <img src="../../../images/telegram.png" alt="telegram icon" width="35" height="35">
                 </ShareNetwork>
             </div>
             <div class="col">
@@ -45,7 +45,7 @@
                     quote="test"
                     hashtags=""
                 >
-                    <img src="../../../images/whatsapp.png" alt="whatsapp icon">
+                    <img src="../../../images/whatsapp.png" alt="whatsapp icon" width="35" height="35">
                 </ShareNetwork>
             </div>
             <div class="col">
@@ -57,7 +57,7 @@
                     quote="test"
                     hashtags=""
                 >
-                    <img src="../../../images/viber.png" alt="viber icon">
+                    <img src="../../../images/viber.png" alt="viber icon" width="35" height="35">
                 </ShareNetwork>
             </div>
         </div>

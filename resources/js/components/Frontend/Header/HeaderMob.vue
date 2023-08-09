@@ -19,7 +19,7 @@
                 <div class="row mt-5">
                     <div class="col p-0">
                         <router-link to="/" style="
-                                               font-size: 30px;
+                                               font-size: 24px;
                                                font-weight: lighter;
                             ">
                             {{this.trans.home[$store.getters.getLanguage]}}
@@ -27,17 +27,17 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-1 p-0 inst">
+                    <div class="col-2 p-0 inst">
                         <a href="https://www.instagram.com/dsdotsen/" style="
                                                font-size: 30px;
                                                font-weight: lighter;
                             "
                            target="_blank"
                         >
-                            <img src="../../../images/instagram.svg" width="50" height="50"/>
+                            <img src="../../../images/instagram.svg" width="30" height="30"/>
                         </a>
                     </div>
-                    <div class="col p-0 language">
+                    <div class="col pt-0 language">
                         <div class="row">
                             <div class="col">
                                 <span @click="changeLang" id="EN" :class="this.current_language.EN">EN</span>
@@ -150,7 +150,7 @@ export default {
 .language {
     margin-top: 30px;
     opacity: 0.6;
-    font-size: 32px;
+    font-size: 20px;
 }
 
 .current_language {
@@ -179,8 +179,8 @@ export default {
 .category {
     cursor: pointer;
     font-weight: lighter;
-    font-size: 34px;
-    padding: 70px 0px 0px 0px !important;
+    font-size: 24px;
+    padding: 30px 0px 0px 0px !important;
 }
 
 .subcategories {
@@ -189,7 +189,7 @@ export default {
 }
 
 .subcategories a {
-    font-size: 30px;
+    font-size: 22px;
     font-weight: lighter;
 }
 

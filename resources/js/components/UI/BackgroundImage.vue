@@ -17,7 +17,7 @@ export default {
 .photoBorder {
     margin-top: 20px;
     width: 100%;
-    height: 40vh;
+    height: 50vh;
 
     background-repeat     : no-repeat;
     background-size       : contain;

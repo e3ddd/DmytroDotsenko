@@ -1,7 +1,8 @@
 <template>
-    <div id="nav-icon1"
-         :class="{open: this.active}"
-         @click="this.openMenu">
+    <div
+        id="nav-icon1"
+        :class="{open: this.active}"
+        @click="this.openMenu">
         <span></span>
         <span></span>
         <span></span>
@@ -27,9 +28,8 @@ export default {
 
 <style scoped>
 #nav-icon1 {
-    margin: 50px 0px 50px 87%;
+    margin: 45px 0px 0px 85%;
     width: 60px;
-    height: 45px;
     -webkit-transform: rotate(0deg);
     -moz-transform: rotate(0deg);
     -o-transform: rotate(0deg);
@@ -44,10 +44,10 @@ export default {
 #nav-icon1 span, #nav-icon3 span, #nav-icon4 span {
     display: block;
     position: absolute;
-    height: 4px;
-    width: 100%;
+    height: 3px;
+    width: 80%;
     background: black;
-    border-radius: 9px;
+    border-radius: 5px;
     opacity: 1;
     left: 0;
     -webkit-transform: rotate(0deg);

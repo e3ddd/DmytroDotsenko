@@ -1,6 +1,6 @@
 <template>
     <div class="container-fluid">
-        <div class="row header">
+        <div class="row">
             <HeaderMob
                 class="mobile"
             />
