@@ -51,7 +51,7 @@
         </div>
         <div class="row">
             <div class="col-6 pt-5 pb-5 pl-3 pr-0 label">
-                <span class="display-5" ref="observe">dsdotsen</span>
+                <span class="display-5" ref="observe">{{this.trans.title[$store.getters.getLanguage]}}</span>
             </div>
             <div class="col burger m-0 pr-1">
                 <burger-button
@@ -80,7 +80,11 @@ export default {
               home: {
                   en: 'Home',
                   ua: 'Головна',
-              }
+              },
+                title: {
+                    en: 'Dmytro Dotsenko',
+                    ua: 'Дмитро Доценко'
+                },
             },
 
             active: false,

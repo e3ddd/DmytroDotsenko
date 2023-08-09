@@ -104,16 +104,16 @@ export default {
             const animation = [
                 { opacity: 0 }
             ];
-
             const timing = { duration: 500 };
 
             const painting = document.getElementById(this.painting.alias + this.painting.key);
             const slider = document.querySelector('.paintings');
+
             if(this.painting.key === --Object.entries(this.$store.getters.getAllPaintings).length){
                 return;
             }
-
             this.offset -= painting.offsetWidth
+
             painting.animate(animation, timing);
             slider.style.left = this.offset + 'px';
             ++this.painting.key
@@ -124,6 +124,7 @@ export default {
             --this.painting.key
             const painting = document.getElementById(this.painting.alias + this.painting.key);
             const slider = document.querySelector('.paintings');
+            this.sliderWidth += painting.offsetWidth
             if(painting === null){
                 this.painting.key = 0;
                 this.offset = 0
@@ -141,7 +142,7 @@ export default {
 
 <style scoped>
 .body {
-    margin-top: 7%;
+    margin-top: 5%;
 }
 
 .prev {

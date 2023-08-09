@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col p-5 label">
                 <span class="display-5" ref="observe">
-                    <a href="/">dsdotsen</a>
+                    <a href="/">{{this.title[$store.getters.getLanguage]}}</a>
                 </span>
             </div>
             <div class="col d-flex justify-content-center align-items-center">
@@ -93,6 +93,11 @@ export default {
                 UA: 'current_language',
             },
 
+            title: {
+              en: 'Dmytro Dotsenko',
+              ua: 'Дмитро Доценко'
+            },
+
             show_sub: false,
         }
     },
@@ -152,7 +157,7 @@ a {
     margin-left: -12px;
 }
 
-.link {
+.label {
 }
 
 .link a {
