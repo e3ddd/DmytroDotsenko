@@ -21,10 +21,11 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/test', [\App\Http\Controllers\TestController::class, 'test']);
 
-Route::get('/admin/login/log', [LoginController::class, 'login']);
 
 Route::prefix('api')
     ->group(function() {
+        Route::post('/check-login', [LoginController::class, 'check']);
+        Route::post('/login/log', [LoginController::class, 'login']);
         Route::get('/get-all-categories', [CategoriesController::class, 'getAllCategories']);
         Route::get('/get-category-by-id', [CategoriesController::class, 'getCategoryById']);
         Route::get('/get-parent-categories', [CategoriesController::class, 'getParentCategories']);

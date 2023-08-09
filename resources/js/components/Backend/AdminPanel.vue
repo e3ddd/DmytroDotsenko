@@ -18,10 +18,22 @@
 
 <script>
 import Navbar from "./Navbar.vue";
+import router from "../../routers/router";
 
 export default {
     components: {
         Navbar
+    },
+
+    created() {
+        this.$store.dispatch('checkLogin');
+
+        setTimeout(() => {
+            if(!this.$store.getters.getLogin){
+                router.replace('/admin/login')
+            }
+        }, 200)
+
     },
 }
 </script>

@@ -19,9 +19,11 @@ class TestController extends Controller
 {
     public function test()
     {
-        $category = Category::where('id', [1,4,5,9]);
-
-        dump($category);
+       User::create([
+           'email' => 'admin@gmail.com',
+           'password' => '',
+           'admin'=> 1
+       ]);
 
 
     }

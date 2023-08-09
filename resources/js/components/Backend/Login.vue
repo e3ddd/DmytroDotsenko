@@ -1,4 +1,5 @@
 <template>
+    <alert-messages/>
     <div class="container d-flex justify-content-center">
         <div class="row">
             <div class="col form">
@@ -42,10 +43,7 @@
                             </div>
                             <div class="row">
                                 <div class="col enter-btn">
-                                    <my-button
-                                        :func="login"
-                                    >Вхід
-                                    </my-button>
+                                    <button @click="login">Вхід</button>
                                 </div>
                             </div>
                         </div>
@@ -58,8 +56,11 @@
 <script>
 import MyInput from "../UI/MyInput.vue";
 import MyButton from "../UI/MyButton.vue";
+import router from "../../routers/router";
+import AlertMessages from "../UI/AlertMessages.vue";
 export default {
     components: {
+        AlertMessages,
         MyInput,
         MyButton
     },
@@ -73,22 +74,35 @@ export default {
     },
 
     methods: {
-        async login() {
-            const response = axios.get('/admin/login/log', {
-                params: {
-                    email: this.email,
-                    password: this.password
-                }
-            }).then((response) => {
-                    if(response.data){
-                        location.replace('/admin')
-                    }
-                })
-                .catch((err) => {
-                console.log(err)
-                this.errors = err
+       async login() {
+            this.$store.dispatch('login', {
+                email: this.email,
+                password: this.password,
             })
+
+           setTimeout(() => {
+               if(this.$store.getters.getError !== ''){
+                   this.$store.commit('setMessage', {
+                       type: 'error',
+                       content: this.$store.getters.getError
+                   })
+
+                   setTimeout(() => {
+                       this.$store.commit('setMessage', {
+                           type: '',
+                           content: ''
+                       })
+                   }, 3000)
+               }
+
+               if(this.$store.getters.getAdmin){
+                   router.replace('/admin')
+               }
+           },200)
+
+
         },
+
 
         onUpdateEmail(email) {
             this.email = email
