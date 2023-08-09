@@ -45,7 +45,7 @@ export default {
 }
 
 .name {
-    padding: 30px 0px 0px 50px;
+    padding: 20px 0px 0px 30px;
 }
 
 .parameters {
@@ -53,7 +53,7 @@ export default {
 }
 
 .parameters, .year{
-    padding: 10px 0px 0px 50px;
+    padding: 10px 0px 0px 30px;
 }
 
 @keyframes ani {

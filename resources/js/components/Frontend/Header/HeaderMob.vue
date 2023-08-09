@@ -50,10 +50,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-7 p-5 label">
+            <div class="col-6 pt-5 pb-5 pl-3 pr-0 label">
                 <span class="display-5" ref="observe">dsdotsen</span>
             </div>
-            <div class="col burger m-0 p-0">
+            <div class="col burger m-0 pr-1">
                 <burger-button
                     @open="openMenu"
                 />

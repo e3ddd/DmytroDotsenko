@@ -41,11 +41,11 @@ export default {
     cursor: pointer;
 }
 
-#nav-icon1 span, #nav-icon3 span, #nav-icon4 span {
+#nav-icon1 span {
     display: block;
     position: absolute;
     height: 3px;
-    width: 80%;
+    width: 70%;
     background: black;
     border-radius: 5px;
     opacity: 1;
